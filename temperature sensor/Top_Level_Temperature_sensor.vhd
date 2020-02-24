@@ -19,16 +19,9 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.NUMERIC_STD.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity Top_Level_Temperature_sensor is
 
@@ -53,6 +46,16 @@ component RS232
 			DataOut1, DataOut2: out std_logic_vector (7 downto 0));
 
 end component; 
+
+component bcd
+
+  port ( number: in std_logic_vector (7 downto 0);
+			tens: out std_logic_vector (3 downto 0);
+			ones: out std_logic_vector (3 downto 0);
+			tensth: out std_logic_vector (3 downto 0);
+			onesth: out std_logic_vector (3 downto 0));
+
+end component; 
  
 component D4to7
 
@@ -75,6 +78,7 @@ signal iDigitOut3, iDigitOut2, iDigitOut1, iDigitOut0: std_logic_vector (6 downt
 signal iDataOut1: std_logic_vector (7 downto 0);
 signal iDataOut2: std_logic_vector (7 downto 0); 
 signal iCount9: std_logic_vector (8 downto 0) := (others=>'0');
+signal i_tensth,i_onesth,i_ones,i_tens: std_logic_vector (3 downto 0);
 
 begin 
  
@@ -106,25 +110,39 @@ U1: RS232 port map (
 	Txd => Txd,
 	DataOut1 => iDataOut1,
 	DataOut2 => iDataOut2);
- 
-U2: D4to7 port map (
-	Q => iDataOut1(3 downto 0),
-	Seg => iDigitOut0);  
+	
+U2: bcd port map (
+		number => iDataOut1,
+		tens => i_tens,
+		ones => i_ones,
+		tensth => i_tensth,
+		onesth => i_onesth);
  
 U3: D4to7 port map (
-	Q => iDataOut1(7 downto 4),
+	Q => i_tensth,
+	Seg => iDigitOut0);  
+ 
+U4: D4to7 port map (
+	Q => i_onesth,
 	Seg => iDigitOut1);
 
-
-U4: D4to7 port map ( 
-	Q => iDataOut2(3 downto 0),
+U5: D4to7 port map ( 
+	Q => i_ones,
 	Seg => iDigitOut2); 
 	 
-U5: D4to7 port map ( 
-	Q => iDataOut2(7 downto 4),
-	Seg => iDigitOut3);     
+U6: D4to7 port map ( 
+	Q => i_tens,
+	Seg => iDigitOut3);
+	
+--U6: D4to7 port map ( 
+--	Q => bcd_huns(3 downto 0),
+--	Seg => iDigitOut3);	
+--
+--U7: D4to7 port map ( 
+--	Q => bcd_thos(3 downto 0),
+--	Seg => iDigitOut3); 	
  
-U6: scan4digit port map (
+U7: scan4digit port map (
 	Digit3 => iDigitOut3,
 	Digit2 => iDigitOut2,
 	Digit1 => iDigitOut1,
@@ -140,4 +158,3 @@ U6: scan4digit port map (
 	Cg => Cg);
 
 end Behavioral;
-
