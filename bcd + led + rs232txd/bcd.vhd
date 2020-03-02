@@ -1,22 +1,3 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    11:07:40 02/13/2020 
--- Design Name: 
--- Module Name:    bcd - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
---
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
--- Additional Comments: 
---
-----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
@@ -32,22 +13,23 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity bcd is
 
-   Port ( 
-      number   : in  std_logic_vector (7 downto 0);
---		thousands : out std_logic_vector (3 downto 0);
---      hundreds : out std_logic_vector (3 downto 0);
-      tens     : out std_logic_vector (3 downto 0);
-      ones     : out std_logic_vector (3 downto 0);
-		tensth     : out std_logic_vector (3 downto 0);
-		onesth    : out std_logic_vector (3 downto 0)
+	Port( number   : in  std_logic_vector (7 downto 0);
+			converted_number : out std_logic_vector (15 downto 0)
 		);
-		
 end bcd;
 
 architecture Behavioral of bcd is
 
+signal tens,ones,tensth,onesth : std_logic_vector (3 downto 0);
+
+-- for testing
+--signal i_tens,i_ones,i_tensth,i_onesth: std_logic_vector (3 downto 0);
+signal i_converted_number : std_logic_vector (15 downto 0);
+--signal i_test : std_logic_vector (1 downto 0);
+
 begin
-   bin_to_bcd : process (number)
+
+process (number)
 	
 	-- Internal variable for storing bits (array length + (4 * number of place value))
 	variable shift : unsigned(23 downto 0);
@@ -105,10 +87,9 @@ begin
 		
 	end loop;
 	
-	-- Push decimal numbers to output
+	-- Push decimal numbers to internal signal
 --	thousands <= std_logic_vector(tho);
 --	hundreds  <= std_logic_vector(hun);
-
 	tens      <= std_logic_vector(ten);
 	ones      <= std_logic_vector(one);
 	onesth    <= std_logic_vector(oneth);
@@ -123,6 +104,16 @@ begin
 	onesth(1 downto 0) 	<= tenth(8) & oneth (12);
 	
    end process;
-
+	
+	-- Push decimal numbers to output
+	converted_number <= tens & ones & onesth & tensth;
+	
+	-- for verification
+	i_converted_number <= tens & ones & onesth & tensth;
+--	i_tensth <= i_converted_number(3 downto 0);
+--	i_onesth <= i_converted_number(7 downto 4);
+--	i_ones  	<= i_converted_number(11 downto 8);
+--	i_tens  	<= i_converted_number(15 downto 12);
+--	i_test <= i_converted_number(1 downto 0);
 end Behavioral;
 

@@ -1,8 +1,8 @@
 library IEEE;
- use IEEE.STD_LOGIC_1164.ALL;
- use IEEE.STD_LOGIC_ARITH.ALL;
- use IEEE.STD_LOGIC_UNSIGNED.ALL; 
- 
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL; 
+
 ---- Uncomment the following library declaration if instantiating
 ---- any Xilinx primitives in this code.
 --library UNISIM;
@@ -27,8 +27,7 @@ end scan4Digit;
  
 architecture Behavioral of scan4Digit is
 signal iCount16: std_logic_vector (15 downto 0) := (others=>'0');
-signal iDigitOut: std_logic_vector (6 downto 0);
-
+signal iDigitOut: std_logic_vector (6 downto 0) := (others=>'0');
 
 begin
  
@@ -38,7 +37,6 @@ process(Clock)
 begin
 if Clock'event and Clock='1' then
 	iCount16 <= iCount16 + '1';
-
 
 end if;
 
@@ -70,3 +68,4 @@ Cf <= iDigitOut(1);
 Cg <= iDigitOut(0);
   
 end Behavioral;
+
