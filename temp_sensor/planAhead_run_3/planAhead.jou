@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# PlanAhead v14.5 (64-bit)
+# Build 247527 by xbuild on Mon Mar 25 17:13:07 MDT 2013
+# Start of session at: Tue Mar 10 21:15:55 2020
+# Process ID: 11868
+# Log file: D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/planAhead_run_3/planAhead.log
+# Journal file: D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/planAhead_run_3/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source {D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/pa.fromNetlist.tcl}
+set_property drive 8 [get_ports [list Txd]]
+set_property drive 6 [get_ports [list SCLK]]
+set_property drive 12 [get_ports [list SCLK]]
+save_constraints

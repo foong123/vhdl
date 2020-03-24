@@ -1,0 +1,47 @@
+V3 23
+FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/bcd.vhd" 2020/03/24.21:54:04 P.58f
+EN work/bcd 1585058619 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/bcd.vhd" \
+      PB ieee/std_logic_1164 1364358218 PB ieee/NUMERIC_STD 1364358223 \
+      PB ieee/STD_LOGIC_UNSIGNED 1364358221
+AR work/bcd/Behavioral 1585058620 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/bcd.vhd" EN work/bcd 1585058619
+FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/D4to7.vhd" 2020/03/09.12:55:50 P.58f
+EN work/D4to7 1585058621 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/D4to7.vhd" \
+      PB ieee/std_logic_1164 1364358218 PB ieee/STD_LOGIC_UNSIGNED 1364358221 \
+      PB ieee/std_logic_arith 1364358219
+AR work/D4to7/Behavioral 1585058622 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/D4to7.vhd" \
+      EN work/D4to7 1585058621
+FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/Rs232Txd.vhd" 2020/03/24.21:58:22 P.58f
+EN work/Rs232Txd 1585058625 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/Rs232Txd.vhd" \
+      PB ieee/std_logic_1164 1364358218 PB ieee/STD_LOGIC_UNSIGNED 1364358221
+AR work/Rs232Txd/Behavioral 1585058626 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/Rs232Txd.vhd" \
+      EN work/Rs232Txd 1585058625
+FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/scan4digit.vhd" 2020/03/09.16:10:59 P.58f
+EN work/scan4digit 1585058623 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/scan4digit.vhd" \
+      PB ieee/std_logic_1164 1364358218 PB ieee/std_logic_arith 1364358219 \
+      PB ieee/STD_LOGIC_UNSIGNED 1364358221
+AR work/scan4digit/Behavioral 1585058624 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/scan4digit.vhd" \
+      EN work/scan4digit 1585058623
+FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/SPI.vhd" 2020/03/24.21:58:50 P.58f
+EN work/SPI 1585058627 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/SPI.vhd" \
+      PB ieee/std_logic_1164 1364358218 PB ieee/STD_LOGIC_UNSIGNED 1364358221 \
+      PB ieee/std_logic_arith 1364358219
+AR work/SPI/Behavioral 1585058628 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/SPI.vhd" EN work/SPI 1585058627
+FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/top_level_temp_sensor.vhd" 2020/03/24.21:54:53 P.58f
+EN work/top_level_temp_sensor 1585058629 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/top_level_temp_sensor.vhd" \
+      PB ieee/std_logic_1164 1364358218 PB ieee/NUMERIC_STD 1364358223 \
+      PB ieee/STD_LOGIC_UNSIGNED 1364358221
+AR work/top_level_temp_sensor/Behavioral 1585058630 \
+      FL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/top_level_temp_sensor.vhd" \
+      EN work/top_level_temp_sensor 1585058629 CP bcd CP D4to7 CP scan4digit \
+      CP Rs232Txd CP SPI

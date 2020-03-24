@@ -1,0 +1,157 @@
+
+****** PlanAhead v14.5 (64-bit)
+  **** Build 247527 by xbuild on Mon Mar 25 17:13:07 MDT 2013
+    ** Copyright 1986-1999, 2001-2012 Xilinx, Inc. All Rights Reserved.
+
+INFO: [Common 17-78] Attempting to get a license: PlanAhead
+INFO: [Common 17-290] Got license for PlanAhead
+INFO: [Device 21-36] Loading parts and site information from C:/Xilinx/14.5/ISE_DS/PlanAhead/data/parts/arch.xml
+Parsing RTL primitives file [C:/Xilinx/14.5/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+Finished parsing RTL primitives file [C:/Xilinx/14.5/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+start_gui
+source {D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/pa.fromNetlist.tcl}
+# create_project -name temp_sensor -dir "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/planAhead_run_2" -part xc3s500efg320-5
+# set_property design_mode GateLvl [get_property srcset [current_run -impl]]
+# set_property edif_top_file "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/top_level_temp_sensor.ngc" [ get_property srcset [ current_run ] ]
+# add_files -norecurse { {D:/unmc degree/year 4/sem2/hdl/project/temp_sensor} }
+# set_param project.pinAheadLayout  yes
+# set_property target_constrs_file "top_level_temp_sensor.ucf" [current_fileset -constrset]
+Adding file 'D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/top_level_temp_sensor.ucf' to fileset 'constrs_1'
+# add_files [list {top_level_temp_sensor.ucf}] -fileset [get_property constrset [current_run]]
+# link_design
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+Design is defaulting to project part: xc3s500efg320-5
+Release 14.5 - ngc2edif P.58f (nt64)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+Reading design top_level_temp_sensor.ngc ...
+WARNING:NetListWriters:298 - No output is written to top_level_temp_sensor.xncf,
+   ignored.
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+WARNING:NetListWriters:306 - Signal bus U10/iShiftRegister<14 : 0> on block
+   top_level_temp_sensor is not reconstructed, because there are some missing
+   bus signals.
+WARNING:NetListWriters:306 - Signal bus i_converted_number<23 : 1> on block
+   top_level_temp_sensor is not reconstructed, because there are some missing
+   bus signals.
+  finished :Prep
+Writing EDIF netlist file top_level_temp_sensor.edif ...
+ngc2edif: Total memory usage is 4315576 kilobytes
+
+Parsing EDIF File [./planAhead_run_2/temp_sensor.data/cache/top_level_temp_sensor_ngc_zx.edif]
+Finished Parsing EDIF File [./planAhead_run_2/temp_sensor.data/cache/top_level_temp_sensor_ngc_zx.edif]
+INFO: [Designutils 20-910] Reading macro library C:/Xilinx/14.5/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3e/spartan3e/hd_int_macros.edn
+Parsing EDIF File [C:/Xilinx/14.5/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3e/spartan3e/hd_int_macros.edn]
+Finished Parsing EDIF File [C:/Xilinx/14.5/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3e/spartan3e/hd_int_macros.edn]
+Loading clock regions from C:/Xilinx/14.5/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/xc3s500e/ClockRegion.xml
+Loading clock buffers from C:/Xilinx/14.5/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/xc3s500e/ClockBuffers.xml
+Loading package from C:/Xilinx/14.5/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/xc3s500e/fg320/Package.xml
+Loading io standards from C:/Xilinx/14.5/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3e/IOStandards.xml
+INFO: [Device 21-19] Loading pkg sso from C:/Xilinx/14.5/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/xc3s500e/fg320/SSORules.xml
+Loading list of drcs for the architecture : C:/Xilinx/14.5/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3e/spartan3e/drc.xml
+INFO: [Timing 38-77] Reading timing library C:/Xilinx/14.5/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/spartan3e-5.lib.
+INFO: [Timing 38-34] Done reading timing library C:/Xilinx/14.5/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/spartan3e-5.lib.
+Parsing UCF File [D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/top_level_temp_sensor.ucf]
+Finished Parsing UCF File [D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/top_level_temp_sensor.ucf]
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Phase 0 | Netlist Checksum: 7df06e59
+link_design: Time (s): elapsed = 00:00:07 . Memory (MB): peak = 577.949 ; gain = 124.859
+startgroup
+set_property package_pin A13 [get_ports {An[5]}]
+endgroup
+startgroup
+set_property package_pin B13 [get_ports {An[4]}]
+endgroup
+startgroup
+set_property package_pin A14 [get_ports {An[3]}]
+endgroup
+startgroup
+set_property package_pin C14 [get_ports {An[2]}]
+endgroup
+set_property package_pin "" [get_ports [list  {An[1]}]]
+startgroup
+set_property package_pin D14 [get_ports {An[0]}]
+endgroup
+startgroup
+set_property package_pin B14 [get_ports {An[2]}]
+endgroup
+startgroup
+set_property package_pin C14 [get_ports {An[1]}]
+endgroup
+startgroup
+set_property package_pin B4 [get_ports Ca]
+endgroup
+startgroup
+set_property package_pin A4 [get_ports Cb]
+endgroup
+startgroup
+set_property package_pin D5 [get_ports Cc]
+endgroup
+startgroup
+set_property package_pin C5 [get_ports Cd]
+endgroup
+startgroup
+set_property package_pin A6 [get_ports Ce]
+endgroup
+startgroup
+set_property package_pin B6 [get_ports Cf]
+endgroup
+startgroup
+set_property package_pin E7 [get_ports Cg]
+endgroup
+startgroup
+set_property package_pin B16 [get_ports CS]
+endgroup
+startgroup
+set_property package_pin E13 [get_ports MISO]
+endgroup
+set_property package_pin "" [get_ports [list  Reset]]
+startgroup
+set_property package_pin A16 [get_ports SCLK]
+endgroup
+startgroup
+set_property package_pin G9 [get_ports SPI_power]
+endgroup
+startgroup
+set_property package_pin C9 [get_ports SystemClock]
+endgroup
+set_property is_loc_fixed false [get_ports [list  SystemClock]]
+set_property iostandard LVCMOS33 [get_ports [list SPI_power]]
+startgroup
+set_property package_pin M14 [get_ports Txd]
+endgroup
+startgroup
+set_property package_pin V4 [get_ports Reset]
+endgroup
+save_constraints
+set_property iostandard LVCMOS25 [get_ports [list MISO]]
+save_constraints
+startgroup
+set_property package_pin C9 [get_ports SystemClock]
+endgroup
+set_property iostandard LVCMOS33 [get_ports [list {An[5]} {An[4]} {An[3]} {An[2]} {An[1]} {An[0]}]]
+set_property iostandard LVCMOS33 [get_ports [list Ca]]
+set_property iostandard LVCMOS33 [get_ports [list Cb]]
+set_property iostandard LVCMOS33 [get_ports [list Cc]]
+set_property iostandard LVCMOS33 [get_ports [list Cd]]
+set_property iostandard LVCMOS33 [get_ports [list Ce]]
+set_property iostandard LVCMOS33 [get_ports [list Cf]]
+set_property iostandard LVCMOS25 [get_ports [list Cg]]
+set_property iostandard LVCMOS25 [get_ports [list CS]]
+set_property iostandard LVCMOS33 [get_ports [list Cg]]
+set_property iostandard LVCMOS33 [get_ports [list CS]]
+set_property iostandard LVCMOS33 [get_ports [list Reset]]
+set_property iostandard LVCMOS33 [get_ports [list SCLK]]
+set_property iostandard LVCMOS33 [get_ports [list MISO]]
+set_property iostandard LVCMOS33 [get_ports [list SystemClock]]
+set_property iostandard LVCMOS33 [get_ports [list Txd]]
+set_property iostandard LVTTL [get_ports [list Txd]]
+save_constraints
+exit
+ERROR: [Common 17-39] 'stop_gui' failed due to earlier errors.
+INFO: [Common 17-206] Exiting PlanAhead at Tue Mar 10 17:17:35 2020...
+INFO: [Common 17-83] Releasing license: PlanAhead

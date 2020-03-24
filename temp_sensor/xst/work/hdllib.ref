@@ -1,0 +1,12 @@
+AR rs232txd behavioral "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/Rs232Txd.vhd" sub00/vhpl07 1585058626
+AR scan4digit behavioral "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/scan4digit.vhd" sub00/vhpl05 1585058624
+EN spi NULL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/SPI.vhd" sub00/vhpl10 1585058627
+AR spi behavioral "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/SPI.vhd" sub00/vhpl11 1585058628
+EN scan4digit NULL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/scan4digit.vhd" sub00/vhpl04 1585058623
+EN rs232txd NULL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/Rs232Txd.vhd" sub00/vhpl06 1585058625
+AR bcd behavioral "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/bcd.vhd" sub00/vhpl01 1585058620
+AR d4to7 behavioral "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/D4to7.vhd" sub00/vhpl03 1585058622
+EN d4to7 NULL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/D4to7.vhd" sub00/vhpl02 1585058621
+AR top_level_temp_sensor behavioral "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/top_level_temp_sensor.vhd" sub00/vhpl09 1585058630
+EN top_level_temp_sensor NULL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/top_level_temp_sensor.vhd" sub00/vhpl08 1585058629
+EN bcd NULL "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/bcd.vhd" sub00/vhpl00 1585058619
