@@ -1,0 +1,883 @@
+Release 14.5 - xst P.58f (nt64)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.09 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.09 secs
+ 
+--> Reading design: top_level_temp_sensor.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "top_level_temp_sensor.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "top_level_temp_sensor"
+Output Format                      : NGC
+Target Device                      : xc3s500e-5-fg320
+
+---- Source Options
+Top Module Name                    : top_level_temp_sensor
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 500
+Add Generic Clock Buffer(BUFG)     : 24
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/bcd.vhd" in Library work.
+Architecture behavioral of Entity bcd is up to date.
+Compiling vhdl file "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/D4to7.vhd" in Library work.
+Architecture behavioral of Entity d4to7 is up to date.
+Compiling vhdl file "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/scan4digit.vhd" in Library work.
+Architecture behavioral of Entity scan4digit is up to date.
+Compiling vhdl file "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/Rs232Txd.vhd" in Library work.
+Entity <rs232txd> compiled.
+Entity <rs232txd> (Architecture <behavioral>) compiled.
+Compiling vhdl file "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/SPI.vhd" in Library work.
+Entity <spi> compiled.
+Entity <spi> (Architecture <behavioral>) compiled.
+Compiling vhdl file "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/top_level_temp_sensor.vhd" in Library work.
+Architecture behavioral of Entity top_level_temp_sensor is up to date.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <top_level_temp_sensor> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <bcd> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <D4to7> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <scan4digit> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <Rs232Txd> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <SPI> in library <work> (architecture <behavioral>).
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <top_level_temp_sensor> in library <work> (Architecture <behavioral>).
+Entity <top_level_temp_sensor> analyzed. Unit <top_level_temp_sensor> generated.
+
+Analyzing Entity <bcd> in library <work> (Architecture <behavioral>).
+Entity <bcd> analyzed. Unit <bcd> generated.
+
+Analyzing Entity <D4to7> in library <work> (Architecture <behavioral>).
+Entity <D4to7> analyzed. Unit <D4to7> generated.
+
+Analyzing Entity <scan4digit> in library <work> (Architecture <behavioral>).
+Entity <scan4digit> analyzed. Unit <scan4digit> generated.
+
+Analyzing Entity <Rs232Txd> in library <work> (Architecture <behavioral>).
+    Set property "enum_encoding = 00 01 10 11" for signal <presState>.
+    Set property "enum_encoding = 00 01 10 11" for signal <nextState>.
+Entity <Rs232Txd> analyzed. Unit <Rs232Txd> generated.
+
+Analyzing Entity <SPI> in library <work> (Architecture <behavioral>).
+    Set property "enum_encoding = 00 01 11" for signal <presState>.
+    Set property "enum_encoding = 00 01 11" for signal <nextState>.
+Entity <SPI> analyzed. Unit <SPI> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <bcd>.
+    Related source file is "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/bcd.vhd".
+WARNING:Xst:646 - Signal <i_converted_number<7:5>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <i_converted_number<3:2>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 5-bit comparator greater for signal <bcd_10$cmp_gt0000> created at line 54.
+    Found 5-bit comparator greater for signal <bcd_10$cmp_gt0001> created at line 54.
+    Found 5-bit comparator greater for signal <bcd_10$cmp_gt0002> created at line 54.
+    Found 5-bit comparator greater for signal <bcd_10$cmp_gt0003> created at line 54.
+    Found 5-bit comparator greater for signal <bcd_10$cmp_gt0004> created at line 54.
+    Found 5-bit comparator greater for signal <bcd_10$cmp_gt0005> created at line 54.
+    Found 5-bit comparator greater for signal <bcd_11$cmp_gt0000> created at line 54.
+    Found 4-bit adder for signal <bcd_11_8$add0000> created at line 56.
+    Found 4-bit adder for signal <bcd_11_8$add0001> created at line 56.
+    Found 4-bit adder for signal <bcd_11_8$add0002> created at line 56.
+    Found 4-bit adder for signal <bcd_11_8$add0003> created at line 56.
+    Found 4-bit adder for signal <bcd_11_8$add0004> created at line 56.
+    Found 4-bit adder for signal <bcd_11_8$add0005> created at line 56.
+    Found 4-bit adder for signal <bcd_11_8$add0006> created at line 56.
+    Found 5-bit comparator greater for signal <bcd_15$cmp_gt0000> created at line 61.
+    Found 5-bit comparator greater for signal <bcd_15$cmp_gt0001> created at line 61.
+    Found 5-bit comparator greater for signal <bcd_15$cmp_gt0002> created at line 61.
+    Found 5-bit comparator greater for signal <bcd_15$cmp_gt0003> created at line 61.
+    Found 4-bit adder for signal <bcd_15_12$add0000> created at line 63.
+    Found 4-bit adder for signal <bcd_15_12$add0001> created at line 63.
+    Found 4-bit adder for signal <bcd_15_12$add0002> created at line 63.
+    Found 4-bit adder for signal <bcd_15_12$add0003> created at line 63.
+    Found 5-bit comparator greater for signal <bcd_19$cmp_gt0000> created at line 68.
+    Found 4-bit adder for signal <bcd_19_16$add0000> created at line 70.
+    Found 5-bit comparator greatequal for signal <bcd_3$cmp_ge0000> created at line 40.
+    Found 5-bit comparator greatequal for signal <bcd_3$cmp_ge0001> created at line 40.
+    Found 5-bit comparator greatequal for signal <bcd_3$cmp_ge0002> created at line 40.
+    Found 5-bit comparator greatequal for signal <bcd_3$cmp_ge0003> created at line 40.
+    Found 5-bit comparator greatequal for signal <bcd_3$cmp_ge0004> created at line 40.
+    Found 5-bit comparator greatequal for signal <bcd_3$cmp_ge0005> created at line 40.
+    Found 5-bit comparator greatequal for signal <bcd_3$cmp_ge0006> created at line 40.
+    Found 5-bit comparator greatequal for signal <bcd_3$cmp_ge0007> created at line 40.
+    Found 5-bit comparator greatequal for signal <bcd_3$cmp_ge0008> created at line 40.
+    Found 5-bit comparator greatequal for signal <bcd_3$cmp_ge0009> created at line 40.
+    Found 5-bit comparator greatequal for signal <bcd_3$cmp_ge0010> created at line 40.
+    Found 4-bit adder for signal <bcd_3_0$add0000> created at line 42.
+    Found 4-bit adder for signal <bcd_3_0$add0001> created at line 42.
+    Found 4-bit adder for signal <bcd_3_0$add0002> created at line 42.
+    Found 4-bit adder for signal <bcd_3_0$add0003> created at line 42.
+    Found 4-bit adder for signal <bcd_3_0$add0004> created at line 42.
+    Found 4-bit adder for signal <bcd_3_0$add0005> created at line 42.
+    Found 4-bit adder for signal <bcd_3_0$add0006> created at line 42.
+    Found 4-bit adder for signal <bcd_3_0$add0007> created at line 42.
+    Found 4-bit adder for signal <bcd_3_0$add0008> created at line 42.
+    Found 4-bit adder for signal <bcd_3_0$add0009> created at line 42.
+    Found 4-bit adder for signal <bcd_3_0$add0010> created at line 42.
+    Found 5-bit comparator greatequal for signal <bcd_7$cmp_ge0000> created at line 47.
+    Found 5-bit comparator greatequal for signal <bcd_7$cmp_ge0001> created at line 47.
+    Found 5-bit comparator greatequal for signal <bcd_7$cmp_ge0002> created at line 47.
+    Found 5-bit comparator greatequal for signal <bcd_7$cmp_ge0003> created at line 47.
+    Found 5-bit comparator greatequal for signal <bcd_7$cmp_ge0004> created at line 47.
+    Found 5-bit comparator greatequal for signal <bcd_7$cmp_ge0005> created at line 47.
+    Found 5-bit comparator greatequal for signal <bcd_7$cmp_ge0006> created at line 47.
+    Found 5-bit comparator greatequal for signal <bcd_7$cmp_ge0007> created at line 47.
+    Found 5-bit comparator greatequal for signal <bcd_7$cmp_ge0008> created at line 47.
+    Found 5-bit comparator greatequal for signal <bcd_7$cmp_ge0009> created at line 47.
+    Found 4-bit adder for signal <bcd_7_4$add0000> created at line 49.
+    Found 4-bit adder for signal <bcd_7_4$add0001> created at line 49.
+    Found 4-bit adder for signal <bcd_7_4$add0002> created at line 49.
+    Found 4-bit adder for signal <bcd_7_4$add0003> created at line 49.
+    Found 4-bit adder for signal <bcd_7_4$add0004> created at line 49.
+    Found 4-bit adder for signal <bcd_7_4$add0005> created at line 49.
+    Found 4-bit adder for signal <bcd_7_4$add0006> created at line 49.
+    Found 4-bit adder for signal <bcd_7_4$add0007> created at line 49.
+    Found 4-bit adder for signal <bcd_7_4$add0008> created at line 49.
+    Found 4-bit adder for signal <bcd_7_4$add0009> created at line 49.
+    Summary:
+	inferred  33 Adder/Subtractor(s).
+	inferred  33 Comparator(s).
+Unit <bcd> synthesized.
+
+
+Synthesizing Unit <D4to7>.
+    Related source file is "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/D4to7.vhd".
+    Found 16x7-bit ROM for signal <seg>.
+    Summary:
+	inferred   1 ROM(s).
+Unit <D4to7> synthesized.
+
+
+Synthesizing Unit <scan4digit>.
+    Related source file is "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/scan4digit.vhd".
+    Found 16-bit up counter for signal <iCount16>.
+    Found 7-bit 8-to-1 multiplexer for signal <iDigitOut>.
+    Summary:
+	inferred   1 Counter(s).
+	inferred   7 Multiplexer(s).
+Unit <scan4digit> synthesized.
+
+
+Synthesizing Unit <Rs232Txd>.
+    Related source file is "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/Rs232Txd.vhd".
+    Found finite state machine <FSM_0> for signal <presState>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 6                                              |
+    | Inputs             | 2                                              |
+    | Outputs            | 4                                              |
+    | Clock              | iClock1x                  (rising_edge)        |
+    | Reset              | iClock1xEnable            (negative)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | stidle                                         |
+    | Power Up State     | stidle                                         |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+WARNING:Xst:737 - Found 4-bit latch for signal <i_data_out_sel>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 16x8-bit ROM for signal <i_thous>.
+    Found 16x8-bit ROM for signal <i_huns>.
+    Found 16x8-bit ROM for signal <i_onesth>.
+    Found 16x8-bit ROM for signal <i_tens>.
+    Found 16x8-bit ROM for signal <i_tensth>.
+    Found 16x8-bit ROM for signal <i_ones>.
+    Found 4-bit adder for signal <i_data_out_sel$add0000> created at line 195.
+    Found 8-bit 16-to-1 multiplexer for signal <i_DataIn>.
+    Found 1-bit register for signal <iClock1xEnable>.
+    Found 4-bit up counter for signal <iClockDiv>.
+    Found 5-bit up counter for signal <iClockWordCount>.
+    Found 4-bit up counter for signal <iNoBitsSent>.
+    Found 1-bit register for signal <iSend1>.
+    Found 1-bit register for signal <iSend2>.
+    Found 9-bit register for signal <iTxdBuffer>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred   6 ROM(s).
+	inferred   3 Counter(s).
+	inferred  12 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred   8 Multiplexer(s).
+Unit <Rs232Txd> synthesized.
+
+
+Synthesizing Unit <SPI>.
+    Related source file is "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/SPI.vhd".
+    Found finite state machine <FSM_1> for signal <presState>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 4                                              |
+    | Inputs             | 1                                              |
+    | Outputs            | 3                                              |
+    | Clock              | iSCLK                     (falling_edge)       |
+    | Reset              | iClock1xEnable            (negative)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | stidle                                         |
+    | Power Up State     | stidle                                         |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+WARNING:Xst:737 - Found 1-bit latch for signal <iSend>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
+    Found 1-bit register for signal <CS>.
+    Found 1-bit register for signal <iClock1xEnable>.
+    Found 24-bit comparator greatequal for signal <iClock1xEnable$cmp_ge0000> created at line 55.
+    Found 24-bit up counter for signal <iClockDiv>.
+    Found 16-bit register for signal <iDataOut1>.
+    Found 6-bit up counter for signal <iNoBitsReceived>.
+    Found 1-bit register for signal <iSCLK>.
+    Found 16-bit register for signal <iShiftRegister>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred   2 Counter(s).
+	inferred  35 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+Unit <SPI> synthesized.
+
+
+Synthesizing Unit <top_level_temp_sensor>.
+    Related source file is "D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/top_level_temp_sensor.vhd".
+WARNING:Xst:646 - Signal <i_DataIN<15>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <i_DataIN<2:0>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 9-bit up counter for signal <iCount9>.
+    Summary:
+	inferred   1 Counter(s).
+Unit <top_level_temp_sensor> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# ROMs                                                 : 12
+ 16x7-bit ROM                                          : 6
+ 16x8-bit ROM                                          : 6
+# Adders/Subtractors                                   : 34
+ 4-bit adder                                           : 34
+# Counters                                             : 7
+ 16-bit up counter                                     : 1
+ 24-bit up counter                                     : 1
+ 4-bit up counter                                      : 2
+ 5-bit up counter                                      : 1
+ 6-bit up counter                                      : 1
+ 9-bit up counter                                      : 1
+# Registers                                            : 9
+ 1-bit register                                        : 6
+ 16-bit register                                       : 2
+ 9-bit register                                        : 1
+# Latches                                              : 2
+ 1-bit latch                                           : 1
+ 4-bit latch                                           : 1
+# Comparators                                          : 34
+ 24-bit comparator greatequal                          : 1
+ 5-bit comparator greatequal                           : 21
+ 5-bit comparator greater                              : 12
+# Multiplexers                                         : 2
+ 7-bit 8-to-1 multiplexer                              : 1
+ 8-bit 16-to-1 multiplexer                             : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_1> for best encoding.
+Optimizing FSM <U10/presState/FSM> on signal <presState[1:2]> with user encoding.
+--------------------
+ State  | Encoding
+--------------------
+ stidle | 00
+ stdata | 01
+ ststop | 11
+--------------------
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <U9/presState/FSM> on signal <presState[1:2]> with gray encoding.
+----------------------------
+ State          | Encoding
+----------------------------
+ stidle         | 00
+ stdata         | 01
+ strepeat       | 11
+ sttxdcompleted | 10
+----------------------------
+WARNING:Xst:2677 - Node <iShiftRegister_15> of sequential type is unconnected in block <U10>.
+WARNING:Xst:2677 - Node <iDataOut1_0> of sequential type is unconnected in block <U10>.
+WARNING:Xst:2677 - Node <iDataOut1_1> of sequential type is unconnected in block <U10>.
+WARNING:Xst:2677 - Node <iDataOut1_2> of sequential type is unconnected in block <U10>.
+WARNING:Xst:2677 - Node <iDataOut1_15> of sequential type is unconnected in block <U10>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 2
+# ROMs                                                 : 12
+ 16x7-bit ROM                                          : 6
+ 16x8-bit ROM                                          : 6
+# Adders/Subtractors                                   : 34
+ 4-bit adder                                           : 34
+# Counters                                             : 7
+ 16-bit up counter                                     : 1
+ 24-bit up counter                                     : 1
+ 4-bit up counter                                      : 2
+ 5-bit up counter                                      : 1
+ 6-bit up counter                                      : 1
+ 9-bit up counter                                      : 1
+# Registers                                            : 47
+ Flip-Flops                                            : 47
+# Latches                                              : 2
+ 1-bit latch                                           : 1
+ 4-bit latch                                           : 1
+# Comparators                                          : 34
+ 24-bit comparator greatequal                          : 1
+ 5-bit comparator greatequal                           : 21
+ 5-bit comparator greater                              : 12
+# Multiplexers                                         : 2
+ 7-bit 8-to-1 multiplexer                              : 1
+ 8-bit 16-to-1 multiplexer                             : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <top_level_temp_sensor> ...
+
+Optimizing unit <bcd> ...
+
+Optimizing unit <scan4digit> ...
+
+Optimizing unit <SPI> ...
+
+Optimizing unit <Rs232Txd> ...
+WARNING:Xst:2677 - Node <U10/iDataOut1_15> of sequential type is unconnected in block <top_level_temp_sensor>.
+WARNING:Xst:2677 - Node <U10/iDataOut1_2> of sequential type is unconnected in block <top_level_temp_sensor>.
+WARNING:Xst:2677 - Node <U10/iDataOut1_1> of sequential type is unconnected in block <top_level_temp_sensor>.
+WARNING:Xst:2677 - Node <U10/iDataOut1_0> of sequential type is unconnected in block <top_level_temp_sensor>.
+WARNING:Xst:2677 - Node <U10/iShiftRegister_15> of sequential type is unconnected in block <top_level_temp_sensor>.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block top_level_temp_sensor, actual ratio is 3.
+
+Final Macro Processing ...
+
+Processing Unit <top_level_temp_sensor> :
+	Found 4-bit shift register for signal <U10/iShiftRegister_3>.
+Unit <top_level_temp_sensor> processed.
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 110
+ Flip-Flops                                            : 110
+# Shift Registers                                      : 1
+ 4-bit shift register                                  : 1
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : top_level_temp_sensor.ngr
+Top Level Output File Name         : top_level_temp_sensor
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
+
+Design Statistics
+# IOs                              : 20
+
+Cell Usage :
+# BELS                             : 412
+#      GND                         : 1
+#      INV                         : 15
+#      LUT1                        : 51
+#      LUT2                        : 15
+#      LUT2_L                      : 2
+#      LUT3                        : 69
+#      LUT3_D                      : 2
+#      LUT3_L                      : 1
+#      LUT4                        : 113
+#      LUT4_D                      : 2
+#      MUXCY                       : 56
+#      MUXF5                       : 28
+#      MUXF6                       : 7
+#      VCC                         : 1
+#      XORCY                       : 49
+# FlipFlops/Latches                : 116
+#      FD                          : 16
+#      FDC                         : 8
+#      FDC_1                       : 2
+#      FDCE                        : 9
+#      FDE                         : 10
+#      FDE_1                       : 24
+#      FDP_1                       : 1
+#      FDR                         : 33
+#      FDRE                        : 4
+#      FDS                         : 2
+#      FDSE                        : 2
+#      LD                          : 5
+# Shift Registers                  : 1
+#      SRL16E_1                    : 1
+# Clock Buffers                    : 3
+#      BUFG                        : 2
+#      BUFGP                       : 1
+# IO Buffers                       : 19
+#      IBUF                        : 2
+#      OBUF                        : 17
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s500efg320-5 
+
+ Number of Slices:                      146  out of   4656     3%  
+ Number of Slice Flip Flops:            115  out of   9312     1%  
+ Number of 4 input LUTs:                271  out of   9312     2%  
+    Number used as logic:               270
+    Number used as Shift registers:       1
+ Number of IOs:                          20
+ Number of bonded IOBs:                  20  out of    232     8%  
+    IOB Flip Flops:                       1
+ Number of GCLKs:                         3  out of     24    12%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-------------------------------------------------+-----------------------------+-------+
+Clock Signal                                     | Clock buffer(FF name)       | Load  |
+-------------------------------------------------+-----------------------------+-------+
+SystemClock                                      | BUFGP                       | 51    |
+U10/iSCLK1                                       | BUFG                        | 34    |
+U10/iSend_not0001(U10/iSend_not000111:O)         | NONE(*)(U10/iSend)          | 1     |
+U9/iClockDiv_31                                  | BUFG                        | 20    |
+iCount9_8                                        | NONE(U9/iClockDiv_3)        | 7     |
+U9/presState_cmp_eq0002(U9/presState_FSM_Out01:O)| NONE(*)(U9/i_data_out_sel_3)| 4     |
+-------------------------------------------------+-----------------------------+-------+
+(*) These 2 clock signal(s) are generated by combinatorial logic,
+and XST is not able to identify which are the primary clock signals.
+Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+-------------------------------------------------------+---------------------------+-------+
+Control Signal                                         | Buffer(FF name)           | Load  |
+-------------------------------------------------------+---------------------------+-------+
+U9/iClock1xEnable_inv(U9/iClock1xEnable_inv1_INV_0:O)  | NONE(U9/iClockWordCount_0)| 11    |
+U10/iClock1xEnable_inv(U10/iClock1xEnable_inv1_INV_0:O)| NONE(U10/CS)              | 9     |
+-------------------------------------------------------+---------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -5
+
+   Minimum period: 5.063ns (Maximum Frequency: 197.517MHz)
+   Minimum input arrival time before clock: 4.235ns
+   Maximum output required time after clock: 23.021ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'SystemClock'
+  Clock period: 4.188ns (frequency: 238.780MHz)
+  Total number of paths / destination ports: 601 / 61
+-------------------------------------------------------------------------
+Delay:               4.188ns (Levels of Logic = 2)
+  Source:            iCount9_7 (FF)
+  Destination:       iCount9_0 (FF)
+  Source Clock:      SystemClock rising
+  Destination Clock: SystemClock rising
+
+  Data Path: iCount9_7 to iCount9_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              2   0.514   0.532  iCount9_7 (iCount9_7)
+     LUT4:I0->O            1   0.612   0.426  iCount9_or000010 (iCount9_or000010)
+     LUT4:I1->O            9   0.612   0.697  iCount9_or000039 (iCount9_or0000)
+     FDR:R                     0.795          iCount9_0
+    ----------------------------------------
+    Total                      4.188ns (2.533ns logic, 1.655ns route)
+                                       (60.5% logic, 39.5% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'U10/iSCLK1'
+  Clock period: 5.063ns (frequency: 197.517MHz)
+  Total number of paths / destination ports: 255 / 57
+-------------------------------------------------------------------------
+Delay:               5.063ns (Levels of Logic = 3)
+  Source:            U10/iNoBitsReceived_0 (FF)
+  Destination:       U10/iDataOut1_14 (FF)
+  Source Clock:      U10/iSCLK1 falling
+  Destination Clock: U10/iSCLK1 falling
+
+  Data Path: U10/iNoBitsReceived_0 to U10/iDataOut1_14
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              6   0.514   0.572  U10/iNoBitsReceived_0 (U10/iNoBitsReceived_0)
+     LUT4:I3->O            1   0.612   0.360  U10/iDataOut1_and00003_SW0 (N90)
+     LUT4_D:I3->O          3   0.612   0.481  U10/iDataOut1_and00003 (U10/iDataOut1_and0000_bdd2)
+     LUT3:I2->O           12   0.612   0.817  U10/iDataOut1_and000011 (U10/iDataOut1_and0000)
+     FDE_1:CE                  0.483          U10/iDataOut1_3
+    ----------------------------------------
+    Total                      5.063ns (2.833ns logic, 2.230ns route)
+                                       (56.0% logic, 44.0% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'U9/iClockDiv_31'
+  Clock period: 4.363ns (frequency: 229.226MHz)
+  Total number of paths / destination ports: 231 / 38
+-------------------------------------------------------------------------
+Delay:               4.363ns (Levels of Logic = 3)
+  Source:            U9/iNoBitsSent_0 (FF)
+  Destination:       U9/iTxdBuffer_7 (FF)
+  Source Clock:      U9/iClockDiv_31 rising
+  Destination Clock: U9/iClockDiv_31 rising
+
+  Data Path: U9/iNoBitsSent_0 to U9/iTxdBuffer_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             5   0.514   0.541  U9/iNoBitsSent_0 (U9/iNoBitsSent_0)
+     LUT4_D:I3->O          6   0.612   0.599  U9/iTxdBuffer_mux0000<4>11 (U9/N0)
+     LUT3:I2->O            7   0.612   0.605  U9/iTxdBuffer_mux0000<4>31 (U9/iEnableShift)
+     LUT4:I3->O            1   0.612   0.000  U9/iTxdBuffer_mux0000<2>1 (U9/iTxdBuffer_mux0000<2>)
+     FDE:D                     0.268          U9/iTxdBuffer_2
+    ----------------------------------------
+    Total                      4.363ns (2.618ns logic, 1.745ns route)
+                                       (60.0% logic, 40.0% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'iCount9_8'
+  Clock period: 3.267ns (frequency: 306.110MHz)
+  Total number of paths / destination ports: 21 / 14
+-------------------------------------------------------------------------
+Delay:               3.267ns (Levels of Logic = 1)
+  Source:            U9/iClock1xEnable (FF)
+  Destination:       U9/iClockDiv_3 (FF)
+  Source Clock:      iCount9_8 rising
+  Destination Clock: iCount9_8 rising
+
+  Data Path: U9/iClock1xEnable to U9/iClockDiv_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDSE:C->Q            12   0.514   0.847  U9/iClock1xEnable (U9/iClock1xEnable)
+     LUT4:I2->O            4   0.612   0.499  U9/iClockDiv_and00001 (U9/iClockDiv_and0000)
+     FDRE:R                    0.795          U9/iClockDiv_0
+    ----------------------------------------
+    Total                      3.267ns (1.921ns logic, 1.346ns route)
+                                       (58.8% logic, 41.2% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'U9/presState_cmp_eq0002'
+  Clock period: 2.896ns (frequency: 345.304MHz)
+  Total number of paths / destination ports: 10 / 4
+-------------------------------------------------------------------------
+Delay:               2.896ns (Levels of Logic = 1)
+  Source:            U9/i_data_out_sel_0 (LATCH)
+  Destination:       U9/i_data_out_sel_0 (LATCH)
+  Source Clock:      U9/presState_cmp_eq0002 falling
+  Destination Clock: U9/presState_cmp_eq0002 falling
+
+  Data Path: U9/i_data_out_sel_0 to U9/i_data_out_sel_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD:G->Q              25   0.588   1.071  U9/i_data_out_sel_0 (U9/i_data_out_sel_0)
+     INV:I->O              1   0.612   0.357  U9/Madd_i_data_out_sel_add0000_xor<0>11_INV_0 (U9/Mmux_i_DataIn_101)
+     LD:D                      0.268          U9/i_data_out_sel_0
+    ----------------------------------------
+    Total                      2.896ns (1.468ns logic, 1.428ns route)
+                                       (50.7% logic, 49.3% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'SystemClock'
+  Total number of paths / destination ports: 34 / 34
+-------------------------------------------------------------------------
+Offset:              4.235ns (Levels of Logic = 2)
+  Source:            Reset (PAD)
+  Destination:       U10/iClockDiv_23 (FF)
+  Destination Clock: SystemClock rising
+
+  Data Path: Reset to U10/iClockDiv_23
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             4   1.106   0.651  Reset_IBUF (Reset_IBUF)
+     LUT2:I0->O           25   0.612   1.071  U10/iClockDiv_or00001 (U10/iClockDiv_or0000)
+     FDR:R                     0.795          U10/iClockDiv_0
+    ----------------------------------------
+    Total                      4.235ns (2.513ns logic, 1.722ns route)
+                                       (59.3% logic, 40.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'iCount9_8'
+  Total number of paths / destination ports: 7 / 7
+-------------------------------------------------------------------------
+Offset:              3.514ns (Levels of Logic = 2)
+  Source:            Reset (PAD)
+  Destination:       U9/iClockDiv_3 (FF)
+  Destination Clock: iCount9_8 rising
+
+  Data Path: Reset to U9/iClockDiv_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             4   1.106   0.502  Reset_IBUF (Reset_IBUF)
+     LUT4:I3->O            4   0.612   0.499  U9/iClockDiv_and00001 (U9/iClockDiv_and0000)
+     FDRE:R                    0.795          U9/iClockDiv_0
+    ----------------------------------------
+    Total                      3.514ns (2.513ns logic, 1.001ns route)
+                                       (71.5% logic, 28.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'U10/iSCLK1'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              1.829ns (Levels of Logic = 1)
+  Source:            MISO (PAD)
+  Destination:       U10/Mshreg_iShiftRegister_3 (FF)
+  Destination Clock: U10/iSCLK1 falling
+
+  Data Path: MISO to U10/Mshreg_iShiftRegister_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.106   0.357  MISO_IBUF (MISO_IBUF)
+     SRL16E_1:D                0.366          U10/Mshreg_iShiftRegister_3
+    ----------------------------------------
+    Total                      1.829ns (1.472ns logic, 0.357ns route)
+                                       (80.5% logic, 19.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'SystemClock'
+  Total number of paths / destination ports: 60 / 14
+-------------------------------------------------------------------------
+Offset:              6.605ns (Levels of Logic = 4)
+  Source:            U8/iCount16_13 (FF)
+  Destination:       Ca (PAD)
+  Source Clock:      SystemClock rising
+
+  Data Path: U8/iCount16_13 to Ca
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q              27   0.514   1.224  U8/iCount16_13 (U8/iCount16_13)
+     LUT3:I0->O            1   0.612   0.000  U8/Mmux_iDigitOut_5 (U8/Mmux_iDigitOut_5)
+     MUXF5:I0->O           1   0.278   0.000  U8/Mmux_iDigitOut_3_f5 (U8/Mmux_iDigitOut_3_f5)
+     MUXF6:I1->O           1   0.451   0.357  U8/Mmux_iDigitOut_2_f6 (Cg_OBUF)
+     OBUF:I->O                 3.169          Cg_OBUF (Cg)
+    ----------------------------------------
+    Total                      6.605ns (5.024ns logic, 1.581ns route)
+                                       (76.1% logic, 23.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'U10/iSCLK1'
+  Total number of paths / destination ports: 168225 / 8
+-------------------------------------------------------------------------
+Offset:              23.021ns (Levels of Logic = 19)
+  Source:            U10/iDataOut1_12 (FF)
+  Destination:       Ca (PAD)
+  Source Clock:      U10/iSCLK1 falling
+
+  Data Path: U10/iDataOut1_12 to Ca
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE_1:C->Q            8   0.514   0.795  U10/iDataOut1_12 (U10/iDataOut1_12)
+     LUT4:I0->O            6   0.612   0.599  U1/bcd_11_mux00011 (U1/bcd_11_mux0001)
+     LUT4:I2->O            6   0.612   0.721  U1/bcd_11_mux000211 (U1/N16)
+     LUT2:I0->O            2   0.612   0.449  U1/bcd_10_cmp_gt00021 (U1/bcd_10_cmp_gt0002)
+     LUT4:I1->O            5   0.612   0.568  U1/bcd_9_mux00021 (U1/Madd_bcd_11_8_add0003_lut<2>)
+     LUT3:I2->O            5   0.612   0.541  U1/bcd_11_mux00031 (U1/Madd_bcd_15_12_add0001_cy<0>)
+     LUT4:I3->O            1   0.612   0.000  U1/bcd_15_mux0001_G (N161)
+     MUXF5:I1->O          11   0.278   0.862  U1/bcd_15_mux0001 (U1/bcd_15_mux0001)
+     LUT4:I1->O            2   0.612   0.383  U1/bcd_13_mux00011 (U1/Madd_bcd_15_12_add0002_lut<2>)
+     LUT4:I3->O            9   0.612   0.849  U1/bcd_15_mux000211 (U1/N14)
+     LUT3:I0->O            1   0.612   0.360  U1/Madd_bcd_15_12_add0003_cy<1>1_SW1 (N132)
+     LUT4:I3->O            2   0.612   0.383  U1/Madd_bcd_15_12_add0003_cy<1>1 (U1/Madd_bcd_15_12_add0003_cy<1>)
+     LUT4:I3->O            4   0.612   0.568  U1/bcd_15_mux000311 (U1/N15)
+     LUT3:I1->O            1   0.612   0.360  U1/bcd_13_mux000321 (U1/N12)
+     LUT4:I3->O           12   0.612   0.969  U1/bcd_13_mux00031 (i_converted_number<14>)
+     LUT4:I0->O            1   0.612   0.387  U5/Mrom_seg111 (U5/Mrom_seg1)
+     LUT3:I2->O            1   0.612   0.000  U8/Mmux_iDigitOut_53 (U8/Mmux_iDigitOut_53)
+     MUXF5:I1->O           1   0.278   0.000  U8/Mmux_iDigitOut_4_f5_0 (U8/Mmux_iDigitOut_4_f51)
+     MUXF6:I0->O           1   0.451   0.357  U8/Mmux_iDigitOut_2_f6_0 (Cf_OBUF)
+     OBUF:I->O                 3.169          Cf_OBUF (Cf)
+    ----------------------------------------
+    Total                     23.021ns (13.870ns logic, 9.151ns route)
+                                       (60.3% logic, 39.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'U9/iClockDiv_31'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              4.040ns (Levels of Logic = 1)
+  Source:            U9/iTxdBuffer_0 (FF)
+  Destination:       Txd (PAD)
+  Source Clock:      U9/iClockDiv_31 rising
+
+  Data Path: U9/iTxdBuffer_0 to Txd
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q              1   0.514   0.357  U9/iTxdBuffer_0 (U9/iTxdBuffer_0)
+     OBUF:I->O                 3.169          Txd_OBUF (Txd)
+    ----------------------------------------
+    Total                      4.040ns (3.683ns logic, 0.357ns route)
+                                       (91.2% logic, 8.8% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 5.00 secs
+Total CPU time to Xst completion: 5.79 secs
+ 
+--> 
+
+Total memory usage is 4520180 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   16 (   0 filtered)
+Number of infos    :    2 (   0 filtered)
+

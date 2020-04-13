@@ -1,0 +1,29 @@
+//! **************************************************************************
+// Written by: Map P.58f on Tue Mar 24 22:04:08 2020
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "CS" LOCATE = SITE "B16" LEVEL 1;
+COMP "Ca" LOCATE = SITE "B4" LEVEL 1;
+COMP "Cb" LOCATE = SITE "A4" LEVEL 1;
+COMP "Cc" LOCATE = SITE "D5" LEVEL 1;
+COMP "Cd" LOCATE = SITE "C5" LEVEL 1;
+COMP "Ce" LOCATE = SITE "A6" LEVEL 1;
+COMP "Cf" LOCATE = SITE "B6" LEVEL 1;
+COMP "Cg" LOCATE = SITE "E7" LEVEL 1;
+COMP "Txd" LOCATE = SITE "M14" LEVEL 1;
+COMP "MISO" LOCATE = SITE "E13" LEVEL 1;
+COMP "SCLK" LOCATE = SITE "A16" LEVEL 1;
+COMP "An<0>" LOCATE = SITE "D14" LEVEL 1;
+COMP "An<1>" LOCATE = SITE "C14" LEVEL 1;
+COMP "An<2>" LOCATE = SITE "B14" LEVEL 1;
+COMP "An<3>" LOCATE = SITE "A14" LEVEL 1;
+COMP "An<4>" LOCATE = SITE "B13" LEVEL 1;
+COMP "An<5>" LOCATE = SITE "A13" LEVEL 1;
+COMP "SPI_power" LOCATE = SITE "G9" LEVEL 1;
+COMP "Reset" LOCATE = SITE "V4" LEVEL 1;
+COMP "SystemClock" LOCATE = SITE "C9" LEVEL 1;
+NET "SystemClock_BUFGP/IBUFG" BEL "SystemClock_BUFGP/BUFG.GCLKMUX"
+        USELOCALCONNECT;
+SCHEMATIC END;
+

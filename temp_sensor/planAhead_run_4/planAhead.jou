@@ -1,0 +1,29 @@
+#-----------------------------------------------------------
+# PlanAhead v14.5 (64-bit)
+# Build 247527 by xbuild on Mon Mar 25 17:13:07 MDT 2013
+# Start of session at: Tue Mar 17 10:46:01 2020
+# Process ID: 12360
+# Log file: D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/planAhead_run_4/planAhead.log
+# Journal file: D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/planAhead_run_4/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source {D:/unmc degree/year 4/sem2/hdl/project/temp_sensor/pa.fromNetlist.tcl}
+startgroup
+set_property package_pin A16 [get_ports SCLK]
+endgroup
+startgroup
+set_property package_pin G9 [get_ports SPI_power]
+endgroup
+startgroup
+set_property package_pin C9 [get_ports SystemClock]
+endgroup
+startgroup
+set_property package_pin G9 [get_ports SPI_power]
+endgroup
+startgroup
+set_property package_pin C9 [get_ports SystemClock]
+endgroup
+startgroup
+set_property package_pin B16 [get_ports CS]
+endgroup
+save_constraints

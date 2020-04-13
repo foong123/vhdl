@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Interface Version="1" Minor="1">
+	<Ifc Id="ROOT" Top="1">
+		<Bus Id="An">
+			<Port Id="5" Dir="OUT"/>
+			<Port Id="4" Dir="OUT"/>
+			<Port Id="3" Dir="OUT"/>
+			<Port Id="2" Dir="OUT"/>
+			<Port Id="1" Dir="OUT"/>
+			<Port Id="0" Dir="OUT"/>
+		</Bus>
+		<Port Id="Ca" Dir="OUT"/>
+		<Port Id="Cb" Dir="OUT"/>
+		<Port Id="Cc" Dir="OUT"/>
+		<Port Id="Cd" Dir="OUT"/>
+		<Port Id="Ce" Dir="OUT"/>
+		<Port Id="Cf" Dir="OUT"/>
+		<Port Id="Cg" Dir="OUT"/>
+		<Port Id="CS" Dir="OUT"/>
+		<Port Id="Reset" Dir="IN"/>
+		<Port Id="SPI_power" Dir="OUT"/>
+		<Port Id="Txd" Dir="OUT"/>
+		<Port Id="SystemClock" Dir="IN"/>
+		<Port Id="SCLK" Dir="OUT"/>
+		<Port Id="MISO" Dir="IN"/>
+	</Ifc>
+</Interface>
+
