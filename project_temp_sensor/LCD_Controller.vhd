@@ -17,16 +17,17 @@ architecture Behavioral of LCD_Controller is
 	type tx_sequence is (high_setup, high_hold, oneus, low_setup, low_hold, fortyus, done);
 	signal tx_state : tx_sequence;
 	
-	type init_sequence is (idle, fifteenms, one, two, three, four, five, six, seven, eight, done);
+	type init_sequence is (idle, fifteenms, two_forty_ns, two , four, six, eight, done);
 	signal init_state : init_sequence;
 	
-		type display_state is (init, function_set, entry_set, set_display, clr_display, pause, set_addr, char_sent, done);
+	type display_state is (init, function_set, entry_set, set_display, clr_display, pause, set_addr, char_sent, done);
 	signal cur_state : display_state;
 
 	signal init_init, init_done,LCD_E0, LCD_E1,mux,tx_init,iCharCountEnable: std_logic := '0';
 	signal i : std_logic_vector(19 downto 0) := (others => '0');
 	signal i2 : std_logic_vector(10 downto 0) := (others => '0');
 	signal i3 : std_logic_vector(16 downto 0) := (others => '0');
+	signal i4 : std_logic_vector(2 downto 0) := (others => '0');
 	signal tx_byte,i_DataIn : std_logic_vector(7 downto 0);
 	signal SF_D0, SF_D1,i_data_out_sel : std_logic_vector(3 downto 0):= (others => '0');
 	signal i_data_in_sel: std_logic_vector(23 downto 0) := (others => '0');
@@ -91,7 +92,7 @@ with i_data_out_sel select i_DataIn <=
 		(others => 'X') when others;	
 	
 --process for display
-process(Clock)
+process(Clock,Display,Display_DPRAM,Reset,DataIn,DataInDPRAM)
 begin
 
 	if (Display='1' or Display_DPRAM = '1') and Reset = '0'  then
@@ -99,9 +100,9 @@ begin
 		if Display='1' and Display_DPRAM = '1' then 
 			i_data_in_sel <= DataIn;	-- if both are high then SPI is chosen.
 		elsif Display_DPRAM = '1' then 
-			i_data_in_sel <= DataInDPRAM;
+			i_data_in_sel <= DataInDPRAM;		--DPRAM
 		elsif Display = '1' then 
-			i_data_in_sel <= DataIn;
+			i_data_in_sel <= DataIn;		--DataConverter
 		end if;
 	elsif Reset = '1' then 
 		cur_state <= init;
@@ -181,7 +182,7 @@ with mux select
 	LCD_E1 when others;
 
 -- Power on initialization
-process(Clock,init_init)
+process(Clock,init_init,Display,Reset,Display_DPRAM)
 begin
 	
 	if (Display='1' or Display_DPRAM = '1') and Reset = '0' then
@@ -203,84 +204,63 @@ begin
 			when fifteenms =>
 				init_done <= '0';
 				if i = 750000 then		--15ms
-					init_state <= one;
+					init_state <= two_forty_ns;
 					i <= (others => '0');
 				else
 					init_state <= fifteenms;
 					i <= i + 1;
 			end if;
-			when one =>
+			when two_forty_ns =>
 				SF_D1 <= "0011";
 				LCD_E1 <= '1';
 				init_done <= '0';
 				if i = 11 then		--240ns
-					init_state<=two;
-					i <= (others => '0');
+					i4 <= i4 + 1;
+					if i4 = 1 then 
+						init_state<=two;
+						i <= (others => '0');
+					elsif i4 = 2 then 
+						init_state<=four;
+						i <= (others => '0');
+					elsif i4 = 3 then 
+						init_state<=six;
+						i <= (others => '0');
+					elsif i4 = 4 then 
+						init_state<=eight;
+						i <= (others => '0');
+					end if;
 				else
-					init_state<=one;
+					init_state<=two_forty_ns;
 					i <= i + 1;
 				end if;
 			when two =>
 				LCD_E1 <= '0';
 				init_done <= '0';
 				if i = 205000 then	--4.1ms
-					init_state<=three;
+					init_state<=two_forty_ns;
 					i <= (others => '0');
 				else
 					init_state<=two;
-					i <= i + 1;
-				end if;
-			when three =>
-				SF_D1 <= "0011";
-				LCD_E1 <= '1';
-				init_done <= '0';
-				if i = 11 then		--240ns
-					init_state<=four;
-					i <= (others => '0');
-				else
-					init_state<=three;
 					i <= i + 1;
 				end if;
 			when four =>
 				LCD_E1 <= '0';
 				init_done <= '0';
 				if i = 5000 then		--100us
-					init_state<=five;
+					init_state<=two_forty_ns;
 					i <= (others => '0');
 				else
 					init_state<=four;
-					i <= i + 1;
-				end if;
-			when five =>
-				SF_D1 <= "0011";
-				LCD_E1 <= '1';
-				init_done <= '0';
-				if i = 11  then		--240ns
-					init_state<=six;
-					i <= (others => '0');
-				else
-					init_state<=five;
 					i <= i + 1;
 				end if;
 			when six =>
 				LCD_E1 <= '0';
 				init_done <= '0';
 				if i = 2000 then		--40us
-					init_state<=seven;
+					init_state<=two_forty_ns;
 					i <= (others => '0');
 				else
 					init_state<=six;
-					i <= i + 1;
-				end if;
-			when seven =>
-				SF_D1 <= "0010";
-				LCD_E1 <= '1';
-				init_done <= '0';
-				if i = 11 then		--240ns
-					init_state<=eight;
-					i <= (others => '0');
-				else
-					init_state<=seven;
 					i <= i + 1;
 				end if;
 			when eight =>
@@ -295,15 +275,15 @@ begin
 				end if;
 			when done =>
 				init_state <= done;
+				i4 <= (others => '0');
 				init_done <= '1';
 		end case;
 	end if;
 end process;
 
 --specified by datasheet
-process(Clock,tx_init,iCharCountEnable)
+process(Clock,tx_init,iCharCountEnable,Reset,Display_DPRAM,Display)
 begin
-	
 	if (Display='1' or Display_DPRAM = '1') and Reset = '0' then
 		tx_state <= done;
 		--iCharCount <= (others => '0');		-- reset count the char
@@ -389,5 +369,4 @@ begin
 		end case;
 	end if;
 end process;
-	
 end Behavioral;

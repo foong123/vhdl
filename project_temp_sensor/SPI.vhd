@@ -16,7 +16,7 @@ entity SPI is
 
 PORT( Clock, MISO, Reset: in std_logic;
 		SCLK, CS,Convert: out std_logic;
-		DataOut : out std_logic_vector (11 downto 0));
+		DataOut : out std_logic_vector (23 downto 0));
 			
 end SPI;
 
@@ -34,8 +34,51 @@ attribute enum_encoding : string;
 	signal iClockDiv : std_logic_vector (23 downto 0) := (others => '0');
 	signal iSCLKDiv : std_logic_vector (3 downto 0) := (others => '0');
 	signal iShiftRegister : std_logic_vector (15 downto 0) := (others => '0');
-	signal iDataOut : std_logic_vector (11 downto 0) := (others => '0');
+	signal i_converted_number : std_logic_vector (15 downto 0) := (others => '0');
 	signal iNoBitsReceived : std_logic_vector (5 downto 0) := (others => '0');
+	signal i_decimal : std_logic_vector (7 downto 0) := (others => '0');
+	
+		--Function for bin to bcd
+	function bin_to_bcd (bin_in : std_logic_vector(9 downto 0)) return std_logic_vector is
+
+		-- temporary variable
+		variable temp : STD_LOGIC_VECTOR (9 downto 0);
+		-- variable to store the output BCD number
+		variable bcd : std_logic_vector(15 downto 0) := (others => '0');
+		-- variable to store the output BCD number
+	  -- organized as follows
+	  -- thousands = bcd(15 downto 12),hundreds = bcd(11 downto 8),tens = bcd(7 downto 4),ones = bcd(3 downto 0)
+		begin
+		-- zero the bcd variable
+		bcd := (others => '0');
+		
+		-- read input into temp variable
+		 temp(9 downto 0) := bin_in;
+		-- cycle 10 times as 10 input bits
+		-- need not to check and add 3 for the first 3 iterations as the number can never be > 4
+		for i in 1 to temp'Length loop
+			--one
+			if bcd(3 downto 0) > 4 then  --add 3 as number cannot be > 4.
+				bcd(3 downto 0) := bcd(3 downto 0) + 3;
+			end if;
+			--tens
+			if bcd(7 downto 4) > 4 then  --add 3 as number cannot be > 4.
+				bcd(7 downto 4) := bcd(7 downto 4) + 3;
+			end if;
+			--huns
+			if bcd(11 downto 8) > 4 then  --add 3 as number cannot be > 4.
+				bcd(11 downto 8) := bcd(11 downto 8) + 3;
+			end if;
+			-- thousands can't be > 4 for 12-bit input number so don't need to do anything for thousands	
+			-- shift bcd left by 1 bit, copy MSB of temp into LSB of bcd
+			bcd := bcd(14 downto 0) & temp(9);
+			
+			-- shift temp left by 1 bit
+			temp := temp(8 downto 0) & '0';
+
+		end loop;
+		return bcd;
+	end bin_to_bcd;
 begin
 
 process(Clock)
@@ -55,7 +98,7 @@ begin
 			-- clock divider for SCLK
 			iClock1xEnable <= '1';
 			CS <= '0';
-			if iSCLKDiv = "1101" then
+			if iSCLKDiv = "1101" then		--clock operates at 4.16MHz speed or 240ns period 
 				iSCLKDiv <= "0010";		-- reset clock
 			else
 				iSCLKDiv <= iSCLKDiv + '1';
@@ -76,7 +119,6 @@ begin
 		iNoBitsReceived <= (others => '0');
 		presState <= stIdle;
 		iConvert <= '0';
-
 	else
 	
 		if iSCLK'event and iSCLK = '0' then
@@ -88,7 +130,16 @@ begin
 			if iEnableDataOut = '1' then 
 			
 				iConvert <= '1';
-				iDataOut <= iShiftRegister(14 downto 3);
+				i_converted_number <= bin_to_bcd(iShiftRegister(14 downto 5));
+				-- Decimal handling
+				case iShiftRegister(4 downto 3) is
+					when "00" => i_decimal <= "00000000";
+					when "01" => i_decimal <= "00100101";		--.25
+					when "10" => i_decimal <= "01010000";		--.50
+					when "11" => i_decimal <= "01110101";		--.75
+					when others => i_decimal <= "00000000";
+						
+	end case;
 				
 			else 
 				--write the data 
@@ -100,7 +151,7 @@ begin
 
 end process;
 
-DataOut <= iDataOut;
+DataOut <= i_converted_number & i_decimal ;
 Convert <= iConvert;
 		
 process (presState,iClock1xEnable,iNoBitsReceived)

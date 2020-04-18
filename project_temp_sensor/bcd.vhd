@@ -90,7 +90,7 @@ process(Clock16x)
 --variable temp : STD_LOGIC_VECTOR (9 downto 0);
 begin
 	
-	if Clock16x'event and Clock16x = '1' then
+	if Clock16x'event and Clock16x = '1' then		--150kHz 
 		if Reset = '1' OR iReset = '1' then 
 			iClock1xEnable <= '0';
 			iConvert1 <= '1';
@@ -165,7 +165,7 @@ begin
 				end if;
 				
 		when stConvert =>
-				i_converted_number <= bin_to_bcd(DataIn(11 downto 2));
+				i_converted_number <= bin_to_bcd(DataIn(11 downto 2));		--bits
 				iEnableDataOut <= '1';
 				nextState <= stDone;
 --				if iNoBitsConverted = "1010" then 
@@ -185,9 +185,9 @@ begin
 	-- Decimal handling
 	case DataIn(1 downto 0) is
 		when "00" => i_decimal <= "00000000";
-		when "01" => i_decimal <= "00100101";
-		when "10" => i_decimal <= "01010000";
-		when "11" => i_decimal <= "01110101";
+		when "01" => i_decimal <= "00100101";		--.25
+		when "10" => i_decimal <= "01010000";		--.50
+		when "11" => i_decimal <= "01110101";		--.75
 		when others => i_decimal <= "00000000";
 	end case;
 		

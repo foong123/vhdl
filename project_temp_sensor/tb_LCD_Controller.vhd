@@ -82,7 +82,7 @@ BEGIN
 		tb_DataIn <= "000001010100001101010000";	--543.50
 		wait for 1ms;
 		tb_Display  <= '1';
-      wait for 6.52 us;
+      wait for 40 ns;
       tb_Display <= '0';
 		wait for 25ms;
 
@@ -95,33 +95,29 @@ BEGIN
 		wait for 5ms;
 		tb_DataIn <= "000000100011010000100101";	--234.25
 		tb_Display  <= '1';
-      wait for 6.52 us;
+      wait for 40 ns;
       tb_Display <= '0';
 		wait for 27ms;
 		
 		tb_DataInDPRAM <= "000001010000000000000000";	--500.00
 		wait for 1ms;
 		tb_Display_DPRAM  <= '1';
-      wait for 6.52 us;
+      wait for 120 ns;
       tb_Display_DPRAM <= '0';
 		wait for 27ms;
 		
 		tb_DataInDPRAM <= "000100000010001101110101";	--1023.75
 		wait for 1ms;
 		tb_Display_DPRAM  <= '1';
-      wait for 6.52 us;
+      wait for 120 ns;
       tb_Display_DPRAM <= '0';
 		
 		wait for 20ms;
 		tb_Display_DPRAM  <= '1';
 		tb_Display  <= '1';
-      wait for 6.52 us;
+      wait for 120 ns;
       tb_Display_DPRAM <= '0';
 		tb_Display <= '0';
       wait;
-		
-		
-		
    end process;
-
 END;

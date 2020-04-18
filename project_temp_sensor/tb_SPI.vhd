@@ -20,7 +20,7 @@ ARCHITECTURE behavior OF tb_SPI IS
          SCLK : OUT  std_logic;
          CS : OUT  std_logic;
          Convert : OUT  std_logic;
-         DataOut : OUT  std_logic_vector(11 downto 0)
+         DataOut : OUT  std_logic_vector(23 downto 0)
         );
     END COMPONENT;
     
@@ -34,7 +34,7 @@ ARCHITECTURE behavior OF tb_SPI IS
    signal tb_SCLK : std_logic;
    signal tb_CS : std_logic;
    signal tb_Convert : std_logic;
-   signal tb_DataOut : std_logic_vector(11 downto 0);
+   signal tb_DataOut : std_logic_vector(23 downto 0);
 
    -- Clock period definitions
    constant tb_Clock_period : time := 20 ns;
@@ -95,7 +95,7 @@ BEGIN
 		--Write data
 		for i in 0 to 15 loop
 
-			tb_MISO <= Data2(i);
+			tb_MISO <= Data2(i); -- 937 / 3A9
 			wait for 240 ns;
 
       end loop;
@@ -106,7 +106,7 @@ BEGIN
 		--Write data
 		for i in 0 to 15 loop
 
-			tb_MISO <= Data3(i);
+			tb_MISO <= Data3(i);	-- 2000 / 7D0
 			wait for 240 ns;
 
       end loop;
@@ -125,7 +125,7 @@ BEGIN
 		--Write data
 		for i in 0 to 15 loop
 
-			tb_MISO <= Data4(i);
+			tb_MISO <= Data4(i);	-- 4095 / FFF
 			wait for 240 ns;
 
       end loop;

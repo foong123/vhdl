@@ -36,7 +36,7 @@ ARCHITECTURE behavior OF tb_dpram IS
    signal tb_DataOut : std_logic_vector(23 downto 0);
 
    -- Clock period definitions
-   constant Clock_period : time := 6.52 us;
+   constant Clock_period : time := 20ns;
  
 BEGIN
  
@@ -96,13 +96,25 @@ BEGIN
 		wait for 10 * Clock_period;
 		
 		--read
-      tb_Read_button <= '1';		-- read 543.50 value
+      tb_Read_button <= '1';		-- read 0000.00 value
       wait for 5 * Clock_period;
       tb_Read_button <= '0';
 		wait for 10 * Clock_period;
 		
 		--read
-      tb_Read_button <= '1';		-- read 234.25 value
+      tb_Read_button <= '1';		-- read 0000.00 value
+      wait for 5 * Clock_period;
+      tb_Read_button <= '0';
+		wait for 10 * Clock_period;
+		
+		--read
+      tb_Read_button <= '1';		-- read 0000.00 value
+      wait for 5 * Clock_period;
+      tb_Read_button <= '0';
+		wait for 10 * Clock_period;
+		
+		--read
+      tb_Read_button <= '1';		-- read 0000.00 value
       wait for 5 * Clock_period;
       tb_Read_button <= '0';
 		wait for 10 * Clock_period;

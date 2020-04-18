@@ -13,7 +13,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity Rs232Txd is
 
-	port( Reset,Clock16x,Send,Send_DPRAM: in std_logic;
+	port( Reset,Clock,Clock16x,Send,Send_DPRAM: in std_logic;
 			DataIn,DataInDPRAM: in std_logic_vector (23 downto 0);
 			Txd: out std_logic);
 			
@@ -29,12 +29,13 @@ attribute enum_encoding: string;
 	
 	signal presState: stateType;
 	signal nextState: stateType;
-	signal iSend1, iSend2, iReset, iClock1xEnable, iEnableTxdBuffer, iEnableShift,iClock1x,iSend_DPRAM1,iSend_DPRAM2: std_logic := '0';
+	signal iSend1, iSend2, iReset, iClock1xEnable, iEnableTxdBuffer, iEnableShift,iSend_DPRAM1,iSend_DPRAM2: std_logic := '0';
 	signal iTxdBuffer: std_logic_vector (8 downto 0) := (others => '1');
 	signal i_DataIn: std_logic_vector (7 downto 0):= (others => '0');
 	signal iCharCount: std_logic_vector(4 downto 0):= (others => '0');
-	signal i_data_out_sel,iClockDiv,iNoBitsSent: std_logic_vector (3 downto 0):= (others => '0');
+	signal i_data_out_sel,iNoBitsSent: std_logic_vector (3 downto 0):= (others => '0');
 	signal i_data_in_sel: std_logic_vector(23 downto 0) := (others => '0');
+	--signal iClockDiv: std_logic_vector(12 downto 0) := (others => '0');
 
 --	--function for converting bcd to binary for txd transmission
 --	function bcdtobin (data_in_bcd: in std_logic_vector(3 downto 0))
@@ -79,17 +80,17 @@ with i_data_out_sel select i_DataIn <=
 		"00001101" 	when "1111",											-- Carriage Return
 		(others => 'X') when others;
 
-process (Clock16x)
+process (Clock)
 begin
 
-	if Clock16x'event and Clock16x = '1' then
+	if Clock'event and Clock = '1' then
 		if Reset = '1' or iReset = '1' then
 			iSend1 <= '1';
 			iSend2 <= '1';
 			iSend_DPRAM1 <= '1';
 			iSend_DPRAM2 <= '1';
 			iClock1xEnable <= '0';
-			iClockDiv <= (others => '0');
+			--iClockDiv <= (others => '0');
 				
 		else
 			iSend1 <= Send;
@@ -98,38 +99,41 @@ begin
 			iSend_DPRAM2 <= iSend_DPRAM1;
 		end if;
 		
-		if (iSend1 = '1' and iSend2 = '0') then 
+		if iSend1 = '1' and iSend2 = '0' then 
 			i_data_in_sel <= DataIn;	--Signal from Data converter
 			iClock1xEnable <= '1';
 		end if;
 		
-		if (iSend_DPRAM1 = '1' and iSend_DPRAM2 = '0') then 
+		if iSend_DPRAM1 = '1' and iSend_DPRAM2 = '0' then 
 			i_data_in_sel <= DataInDPRAM;		-- Read button from DPRAM 
 			iClock1xEnable <= '1';
 		end if;
 		
-		if (iSend_DPRAM1 = '1' and iSend_DPRAM2 = '0') and (iSend_DPRAM1 = '1' and iSend_DPRAM2 = '0') then 
+		if (iSend_DPRAM1 = '1' and iSend_DPRAM2 = '0') and (iSend1 = '1' and iSend2 = '0') then 
 			i_data_in_sel <= DataIn; --if both are high Send are high at the same time then it will take Data from SPI 
 			iClock1xEnable <= '1';
 		end if;
 
-		if iClock1xEnable = '1' then
-			iClockDiv <= iClockDiv + '1';		-- for the RS232 clock
-		end if;
-		
+--		if iClock1xEnable = '1' then
+--			if iClockDiv = "1101000100111" then --1101000100111 Actual timing
+--				iClockDiv <= "0010111011000"; --0010111011000 Actual timing
+--			else
+--				iClockDiv <= iClockDiv + '1';
+--			end if;
+--		end if;
 	end if;
 end process;
 
-iClock1x <= iClockDiv(3);
+--iClock1x <= iClockDiv(12);
 
-process (iClock1xEnable, iClock1x)
+process (iClock1xEnable, Clock16x)
 begin
 
 	if iClock1xEnable = '0' then
 		iNoBitsSent <= (others=>'0');
 		iCharCount <= (others => '0');		-- reset count the char
 		presState <= stIdle;	
-	elsif iClock1x'event and iClock1x = '1' then
+	elsif Clock16x'event and Clock16x = '1' then
 		presState <= nextState;
 		if iEnableTxdBuffer = '1' then
 			iCharCount <= iCharCount + '1';	-- count the char

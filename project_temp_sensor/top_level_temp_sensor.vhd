@@ -27,24 +27,15 @@ component SPI
 
 	port( Clock,MISO,Reset: in std_logic;
 			SCLK,CS,Convert: out std_logic;
-			DataOut: out std_logic_vector (11 downto 0));
+			DataOut: out std_logic_vector (23 downto 0));
 
 end component;
 
 component Rs232Txd
 
-	port( Reset,Clock16x,Send,Send_DPRAM: in std_logic;
+	port( Reset,Clock,Clock16x,Send,Send_DPRAM: in std_logic;
 			DataIn,DataInDPRAM: std_logic_vector (23 downto 0);
 			Txd: out std_logic);
-
-end component; 
-
-component bcd
-
-  port ( DataIn: in std_logic_vector (11 downto 0);
-  			Clock16x,Reset,Convert : in std_logic;
-			Display : out std_logic;
-			converted_number: out std_logic_vector (23 downto 0));
 
 end component;
 
@@ -74,10 +65,9 @@ component dpram
         DataOut : out std_logic_vector(23 downto 0));
 end component;
 
-signal i_DataIn : std_logic_vector (11 downto 0) := (others => '0');	-- for SPI output
-signal i_converted_number,i_converted_number_DPRAM : std_logic_vector (23 downto 0) := (others => '0');	-- for Binary to BCD output
-signal iClock16x,iConvert,iDisplay,iSend_DPRAM: std_logic;
-signal iCount9: std_logic_vector (8 downto 0) := (others=>'0');	-- for RS232
+signal i_converted_number,i_converted_number_DPRAM : std_logic_vector (23 downto 0) := (others => '0');
+signal iClockDiv: std_logic_vector(12 downto 0) := (others => '0');
+signal iDisplay,iSend_DPRAM,iClock1x: std_logic;
 
 begin
 
@@ -89,28 +79,19 @@ begin
 	
 	if SystemClock'event and SystemClock = '1' then
 		if Reset = '1' then
-			iCount9 <= (others=>'0');
-		elsif
-			iCount9 = "101000101" then -- the divider is 325, or "101000101"
-			iCount9 <= (others=>'0');
+			iClockDiv <= (others=>'0');
+		elsif iClockDiv = "1101000100111" then -- the divider is 325, or "101000101"
+			iClockDiv <= "0010111011000";
 		else 
-			iCount9 <= iCount9 + '1';
+			iClockDiv <= iClockDiv + '1';
 		end if;
 	end if;
 	
 end process;
 
-iClock16x <= iCount9(8);
+iClock1x <= iClockDiv(12);
 
-U1: bcd port map (
-	DataIn => i_DataIn,			
-	Clock16x => iClock16x,
-	Reset => Reset,
-	Convert => iConvert,
-	Display => iDisplay,
-	converted_number => i_converted_number);
-	
-U2: LED_controller port map (
+U1: LED_controller port map (
 	Clock => SystemClock,
 	DataIn => i_converted_number,
 	An => An,
@@ -122,25 +103,26 @@ U2: LED_controller port map (
 	Cf => Cf,
 	Cg => Cg);
 	
-U3: Rs232Txd port map (
+U2: Rs232Txd port map (
 	Reset => Reset,
-	Clock16x => iClock16x,
+	Clock => SystemClock,
+	Clock16x => iClock1x,
 	Send => iDisplay,
 	Send_DPRAM => iSend_DPRAM,
 	DataIn => i_converted_number,
 	DataInDPRAM => i_converted_number_DPRAM,
 	Txd => Txd);
 
-U4: SPI port map (
+U3: SPI port map (
 	Clock => SystemClock,
 	MISO => MISO,
 	Reset => Reset,
 	SCLK => SCLK,
 	CS => CS,
-	Convert => iConvert,
-	DataOut => i_DataIN);
+	Convert => iDisplay,
+	DataOut => i_converted_number);
 	
-U5: LCD_Controller port map (
+U4: LCD_Controller port map (
 	Clock => SystemClock,
 	Reset => Reset,
 	Display => iDisplay,
@@ -153,8 +135,8 @@ U5: LCD_Controller port map (
 	LCD_RW => LCD_RW,
 	SF_CE0 => SF_CE0);
 
-U6: dpram port map (
-	  Clock => iClock16x,
+U5: dpram port map (
+	  Clock => SystemClock,
 	  Read_button => Read_button,
 	  Write_button => Write_button,
 	  DataIn => i_converted_number,

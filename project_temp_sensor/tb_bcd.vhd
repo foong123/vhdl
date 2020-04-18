@@ -15,7 +15,7 @@ ARCHITECTURE behavior OF tb_bcd IS
     COMPONENT bcd
     PORT(
          DataIn : IN  std_logic_vector(11 downto 0);
-         Clock : IN  std_logic;
+         Clock16x : IN  std_logic;
          Reset : IN  std_logic;
          Convert : IN  std_logic;
          Display : OUT  std_logic;
@@ -26,7 +26,7 @@ ARCHITECTURE behavior OF tb_bcd IS
 
    --Inputs
    signal tb_DataIn : std_logic_vector(11 downto 0) := (others => '0');
-   signal tb_Clock : std_logic := '0';
+   signal tb_Clock16x : std_logic := '0';
    signal tb_Reset : std_logic := '0';
    signal tb_Convert : std_logic := '0';
 
@@ -42,7 +42,7 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut: bcd PORT MAP (
           DataIn => tb_DataIn,
-          Clock => tb_Clock,
+          Clock16x => tb_Clock16x,
           Reset => tb_Reset,
           Convert => tb_Convert,
           Display => tb_Display,
@@ -52,9 +52,9 @@ BEGIN
    -- Clock process definitions
    Clock_process :process
    begin
-		tb_Clock <= '0';
+		tb_Clock16x <= '0';
 		wait for Clock_period/2;
-		tb_Clock <= '1';
+		tb_Clock16x <= '1';
 		wait for Clock_period/2;
    end process;
  
@@ -69,30 +69,33 @@ BEGIN
       tb_Reset <= '0';
 		wait for 100ns;
 		
+		wait for 10us;
 		--Insert Stimulus here
-		tb_Convert <= '1';
 		tb_DataIn <= "100001111110";		-- 2174	converted = 543.50 / 0000 0101 0100 0011 0101 0000
-      wait for Clock_period * 2;
+		tb_Convert <= '1';
+      wait for Clock_period;
       tb_Convert <= '0';
-		wait for 10us;
+		wait for 30us;
 		
-		tb_convert <= '1';
+		wait for 10us;
 		tb_DataIn <= "001110101001";		-- 937 	converted = 234.25 / 0000 0010 0011 0100 0010 0101
-      wait for clock_period * 2;
-      tb_convert <= '0';
+		tb_Convert <= '1';
+      wait for Clock_period;
+      tb_Convert <= '0';
+		wait for 30us;
+		
 		wait for 10us;
-
-		tb_convert <= '1';
 		tb_DataIn <= "011111010000";		-- 2000	converted = 500.00 / 0000 0101 0000 0000 0000 0000
-      wait for clock_period * 2;
-      tb_convert <= '0';
+		tb_Convert <= '1';
+      wait for Clock_period;
+      tb_Convert <= '0';
+		wait for 30us;
+		
 		wait for 10us;
-
-		tb_convert <= '1';
 		tb_DataIn <= "111111111111";		-- 4095	converted = 1023.75 / 0001 0000 0010 0011 0111 0101
-      wait for clock_period * 2;
-      tb_convert <= '0';
-		wait for 10us;
+		tb_Convert <= '1';
+      wait for Clock_period;
+      tb_Convert <= '0';
       wait;
    end process;
 

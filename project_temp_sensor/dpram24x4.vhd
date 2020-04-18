@@ -29,7 +29,7 @@ attribute enum_encoding : STRING;
     type stateType is (stIdle, stSave, stDisplay, stStop);
     attribute enum_encoding of statetype : type is "00 01 11 10";
     signal presState,nextState: stateType;
-    signal iWriteEnable,iW,iReset,iRead_button1,iRead_button2,iWrite_button1,iWrite_button2,iReadEnable:std_logic:= '0';
+    signal iWriteEnable,iReset,iRead_button1,iRead_button2,iWrite_button1,iWrite_button2:std_logic:= '0';
     signal iWE: std_logic_vector(0 downto 0)  := (others => '0');
     signal iAddrA,iAddrB: std_logic_vector(3 downto 0)  := (others => '0');
     signal iDataIn,iDataOut: std_logic_vector(23 downto 0) := (others => '0');
@@ -60,11 +60,11 @@ U1 : dpram24x4 port map(
 process (Clock)
 
 begin
-	if Clock'event and Clock = '1' then
+	if Clock'event and Clock = '1' then		--150kHz similar the RS232 clock 
 		if iReset = '1' then		--reset the signal 
 			 iWriteEnable    <= '0';
 			 presState <= stIdle;
-			 iReadEnable <= '0';
+			 --iReadEnable <= '0';
 			 
 		else
 			iRead_button1 <= Read_button;
@@ -80,19 +80,18 @@ begin
 		end if;
 		
 		if iRead_button1 = '0' and iRead_button2 = '0' then 	--make use that read button is not pressed
-			presState <= nextState;
+			presState <= nextState;	--idle
 			if iWrite_button1 = '1' and iWrite_button2 = '0' then		-- check for write button is pressed
 				iWriteEnable <= '1';
 			end if;
 		elsif	iRead_button1 = '1' and iRead_button2 = '0' then		--read button is pressed
 				presState <= stDisplay;
-				iReadEnable <= '1';
 		end if;
 		
 	end if;
 end process;
 
-process (presState,iWriteEnable,iReadEnable)
+process (presState,iWriteEnable)
 begin
 	iReset <= '0';
 	
@@ -101,21 +100,20 @@ begin
 			if iWriteEnable = '1' then
 				nextState <= stSave;
 				iDataIn   <= DataIn;
+				iAddrA <= iAddrA + '1';
 				iAddrB <= (others => '0');
 			else
 				nextState <= stIdle;
 			end if;
 		when stSave =>
 			nextState <= stStop;
-			iAddrA <= iAddrA + '1';
+			--iAddrA <= iAddrA + '1';
 		when stDisplay =>
 			nextState <= stStop;
+			iAddrB <= iAddrB + '1';
 			Display   <= '1';
 		when stStop =>
 			Display   <= '0';
-			if iReadEnable = '1' then 
-				iAddrB <= iAddrB + '1';
-			end if;
 			nextState <= stIdle;
 			iReset <= '1';
   end case;
