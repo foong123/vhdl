@@ -1,2 +1,0 @@
-vhdl isim_temp "Rs232Txd.vhd"
-vhdl isim_temp "tb_Rs232Txd.vhd"

@@ -1,10 +1,6 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
  
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
- 
 ENTITY tb_LCD_Controller IS
 END tb_LCD_Controller;
  
@@ -27,8 +23,7 @@ ARCHITECTURE behavior OF tb_LCD_Controller IS
          SF_CE0 : OUT  std_logic
         );
     END COMPONENT;
-    
-
+   
    --Inputs
    signal tb_Clock : std_logic := '0';
    signal tb_Display : std_logic := '0';
@@ -48,7 +43,6 @@ ARCHITECTURE behavior OF tb_LCD_Controller IS
    constant Clock_period : time := 20 ns;
  
 BEGIN
- 
 	-- Instantiate the Unit Under Test (UUT)
    uut: LCD_Controller PORT MAP (
           Clock => tb_Clock,
@@ -72,7 +66,6 @@ BEGIN
 		tb_Clock <= '1';
 		wait for Clock_period/2;
    end process;
- 
 
    -- Stimulus process
    stim_proc: process

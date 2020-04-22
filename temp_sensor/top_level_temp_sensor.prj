@@ -1,6 +1,0 @@
-vhdl work "SPI.vhd"
-vhdl work "scan4digit.vhd"
-vhdl work "Rs232Txd.vhd"
-vhdl work "D4to7.vhd"
-vhdl work "bcd.vhd"
-vhdl work "top_level_temp_sensor.vhd"

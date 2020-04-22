@@ -3,17 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity dpram is
-
     port (
         Clock,Read_button,Write_button   : in std_logic;
         DataIn  : in std_logic_vector(23 downto 0);
@@ -29,7 +19,7 @@ attribute enum_encoding : STRING;
     type stateType is (stIdle, stSave, stDisplay, stStop);
     attribute enum_encoding of statetype : type is "00 01 11 10";
     signal presState,nextState: stateType;
-    signal iWriteEnable,iReset,iRead_button1,iRead_button2,iWrite_button1,iWrite_button2:std_logic:= '0';
+    signal iWriteEnable,iReadEnable,iReset,iRead_button1,iRead_button2,iWrite_button1,iWrite_button2:std_logic:= '0';
     signal iWE: std_logic_vector(0 downto 0)  := (others => '0');
     signal iAddrA,iAddrB: std_logic_vector(3 downto 0)  := (others => '0');
     signal iDataIn,iDataOut: std_logic_vector(23 downto 0) := (others => '0');
@@ -58,14 +48,13 @@ U1 : dpram24x4 port map(
 		  doutb => iDataOut);
 		  
 process (Clock)
-
 begin
-	if Clock'event and Clock = '1' then		--150kHz similar the RS232 clock 
-		if iReset = '1' then		--reset the signal 
+	if Clock'event and Clock = '1' then
+		if iReset = '1' then		--internal reset the signal 
 			 iWriteEnable    <= '0';
+			 iReadEnable    <= '0';	
 			 presState <= stIdle;
-			 --iReadEnable <= '0';
-			 
+			 --iReadEnable <= '0';		 
 		else
 			iRead_button1 <= Read_button;
 			iRead_button2 <= iRead_button1;
@@ -86,8 +75,8 @@ begin
 			end if;
 		elsif	iRead_button1 = '1' and iRead_button2 = '0' then		--read button is pressed
 				presState <= stDisplay;
+				iReadEnable <= '1';
 		end if;
-		
 	end if;
 end process;
 
@@ -97,29 +86,32 @@ begin
 	
 	case presState is
 		when stIdle =>
+			Display   <= '0';
 			if iWriteEnable = '1' then
 				nextState <= stSave;
-				iDataIn   <= DataIn;
-				iAddrA <= iAddrA + '1';
 				iAddrB <= (others => '0');
 			else
 				nextState <= stIdle;
 			end if;
 		when stSave =>
 			nextState <= stStop;
-			--iAddrA <= iAddrA + '1';
+			iDataIn   <= DataIn;
+			iAddrA <= iAddrA + '1';
 		when stDisplay =>
 			nextState <= stStop;
 			iAddrB <= iAddrB + '1';
-			Display   <= '1';
 		when stStop =>
-			Display   <= '0';
+			if iReadEnable = '1' then 
+				Display   <= '1';
+				nextState <= stIdle;
+				iReset <= '1';
+			else
 			nextState <= stIdle;
 			iReset <= '1';
+			end if;
   end case;
 end process;
 
 DataOut <= iDataOut;
 iWE     <= "1";
-
 end Behavioral;

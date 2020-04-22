@@ -2,21 +2,10 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity Rs232Txd is
-
 	port( Reset,Clock,Clock16x,Send,Send_DPRAM: in std_logic;
 			DataIn,DataInDPRAM: in std_logic_vector (23 downto 0);
 			Txd: out std_logic);
-			
 end Rs232Txd;
 
 architecture Behavioral of Rs232Txd is
@@ -38,7 +27,7 @@ attribute enum_encoding: string;
 	--signal iClockDiv: std_logic_vector(12 downto 0) := (others => '0');
 
 --	--function for converting bcd to binary for txd transmission
---	function bcdtobin (data_in_bcd: in std_logic_vector(3 downto 0))
+--	function bcdtobin= (data_in_bcd: in std_logic_vector(3 downto 0))
 --		return std_logic_vector is 
 --		variable i_bcdtobin : std_logic_vector(7 downto 0);
 --		
@@ -82,7 +71,6 @@ with i_data_out_sel select i_DataIn <=
 
 process (Clock)
 begin
-
 	if Clock'event and Clock = '1' then
 		if Reset = '1' or iReset = '1' then
 			iSend1 <= '1';
@@ -90,8 +78,7 @@ begin
 			iSend_DPRAM1 <= '1';
 			iSend_DPRAM2 <= '1';
 			iClock1xEnable <= '0';
-			--iClockDiv <= (others => '0');
-				
+			--iClockDiv <= (others => '0');		
 		else
 			iSend1 <= Send;
 			iSend2 <= iSend1;
@@ -105,7 +92,7 @@ begin
 		end if;
 		
 		if iSend_DPRAM1 = '1' and iSend_DPRAM2 = '0' then 
-			i_data_in_sel <= DataInDPRAM;		-- Read button from DPRAM 
+			i_data_in_sel <= DataInDPRAM;		-- Signal from DPRAM 
 			iClock1xEnable <= '1';
 		end if;
 		
@@ -113,10 +100,9 @@ begin
 			i_data_in_sel <= DataIn; --if both are high Send are high at the same time then it will take Data from SPI 
 			iClock1xEnable <= '1';
 		end if;
-
 --		if iClock1xEnable = '1' then
---			if iClockDiv = "1101000100111" then --1101000100111 Actual timing
---				iClockDiv <= "0010111011000"; --0010111011000 Actual timing
+--			if iClockDiv = "1101000100111" then		--9600Hz
+--				iClockDiv <= "0010111011000"; 
 --			else
 --				iClockDiv <= iClockDiv + '1';
 --			end if;
@@ -125,10 +111,8 @@ begin
 end process;
 
 --iClock1x <= iClockDiv(12);
-
 process (iClock1xEnable, Clock16x)
 begin
-
 	if iClock1xEnable = '0' then
 		iNoBitsSent <= (others=>'0');
 		iCharCount <= (others => '0');		-- reset count the char
@@ -145,8 +129,7 @@ begin
 			iNoBitsSent <= iNoBitsSent + '1';		--count number of bit sent on 1 char
 			iTxdBuffer <= '1' & iTxdBuffer(8 downto 1);
 		end if;
-	end if;		
-	
+	end if;	
 end process;
 
 Txd <= iTxdBuffer(0);
@@ -184,8 +167,7 @@ begin
 			end if;
 		when stTxdCompleted =>
 				iReset <= '1';
-				nextState <= stIdle;
-				
+				nextState <= stIdle;		
 	end case;
 end process;
 end Behavioral;

@@ -1,10 +1,5 @@
-
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
- 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
  
 ENTITY tb_Rs232Txd IS
 END tb_Rs232Txd;
@@ -12,7 +7,6 @@ END tb_Rs232Txd;
 ARCHITECTURE behavior OF tb_Rs232Txd IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
- 
     COMPONENT Rs232Txd
     PORT(
          Reset : IN  std_logic;
@@ -25,8 +19,7 @@ ARCHITECTURE behavior OF tb_Rs232Txd IS
          Txd : OUT  std_logic
         );
     END COMPONENT;
-    
-
+   
    --Inputs
    signal tb_Reset : std_logic := '0';
    signal tb_Clock : std_logic := '0';
@@ -44,7 +37,6 @@ ARCHITECTURE behavior OF tb_Rs232Txd IS
 	constant Clock16x_period : time := 104 us;
  
 BEGIN
- 
 	-- Instantiate the Unit Under Test (UUT)
    uut: Rs232Txd PORT MAP (
           Reset => tb_Reset,
@@ -75,7 +67,6 @@ BEGIN
 		wait for Clock16x_period/2;
    end process;
  
-
    -- Stimulus process
    stim_proc: process
    begin		
@@ -92,14 +83,14 @@ BEGIN
 		tb_DataIn <= "000001010100001101010000";	--543.50
 		wait for 1ms;
 		tb_Send  <= '1';
-      wait for 40 ns;
+      wait for 20 ns;
       tb_Send <= '0';
 		
       wait for 25ms;
 		tb_DataIn <= "000000100011010000100101";	--234.25
 		wait for 1ms;
       tb_Send <= '1';
-      wait for 40 ns;
+      wait for 20 ns;
       tb_Send <= '0';
 		
 		wait for  25ms;
@@ -115,8 +106,6 @@ BEGIN
       tb_Send_DPRAM <= '1';
       wait for 120 ns;
       tb_Send_DPRAM <= '0';
-
       wait;
    end process;
-
 END;

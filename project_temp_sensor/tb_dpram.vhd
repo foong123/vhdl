@@ -2,17 +2,12 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
  
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
- 
 ENTITY tb_dpram IS
 END tb_dpram;
  
 ARCHITECTURE behavior OF tb_dpram IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
- 
     COMPONENT dpram
     PORT(
          Clock : IN  std_logic;
@@ -24,7 +19,6 @@ ARCHITECTURE behavior OF tb_dpram IS
         );
     END COMPONENT;
     
-
    --Inputs
    signal tb_Clock : std_logic := '0';
    signal tb_Read_button : std_logic := '0';
@@ -39,7 +33,6 @@ ARCHITECTURE behavior OF tb_dpram IS
    constant Clock_period : time := 20ns;
  
 BEGIN
- 
 	-- Instantiate the Unit Under Test (UUT)
    uut: dpram PORT MAP (
           Clock => tb_Clock,
@@ -59,12 +52,10 @@ BEGIN
 		wait for Clock_period/2;
    end process;
  
-
    -- Stimulus process
    stim_proc: process
    begin		
 		wait for 100ns;
-		
 		tb_Read_button <= '0';
 		
 		--write 
@@ -91,12 +82,6 @@ BEGIN
 		
 		--read
       tb_Read_button <= '1';		-- read 234.25 value
-      wait for 5 * Clock_period;
-      tb_Read_button <= '0';
-		wait for 10 * Clock_period;
-		
-		--read
-      tb_Read_button <= '1';		-- read 0000.00 value
       wait for 5 * Clock_period;
       tb_Read_button <= '0';
 		wait for 10 * Clock_period;
@@ -157,10 +142,6 @@ BEGIN
       tb_Read_button <= '1';		-- read 1023.75 value
       wait for 5 * Clock_period;
       tb_Read_button <= '0';
-		wait for 5 * Clock_period;
-		
-		
       wait;
    end process;
-
 END;

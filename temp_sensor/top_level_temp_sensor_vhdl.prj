@@ -1,6 +1,0 @@
-vhdl work "D:\unmc degree\year 4\sem2\hdl\project\temp_sensor\SPI.vhd"
-vhdl work "D:\unmc degree\year 4\sem2\hdl\project\temp_sensor\scan4digit.vhd"
-vhdl work "D:\unmc degree\year 4\sem2\hdl\project\temp_sensor\Rs232Txd.vhd"
-vhdl work "D:\unmc degree\year 4\sem2\hdl\project\temp_sensor\D4to7.vhd"
-vhdl work "D:\unmc degree\year 4\sem2\hdl\project\temp_sensor\bcd.vhd"
-vhdl work "D:\unmc degree\year 4\sem2\hdl\project\temp_sensor\top_level_temp_sensor.vhd"

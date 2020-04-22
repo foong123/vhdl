@@ -1,17 +1,12 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
  
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
- 
 ENTITY tb_SPI IS
 END tb_SPI;
  
 ARCHITECTURE behavior OF tb_SPI IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
- 
     COMPONENT SPI
     PORT(
          Clock : IN  std_logic;
@@ -19,11 +14,10 @@ ARCHITECTURE behavior OF tb_SPI IS
          Reset : IN  std_logic;
          SCLK : OUT  std_logic;
          CS : OUT  std_logic;
-         Convert : OUT  std_logic;
+         Display : OUT  std_logic;
          DataOut : OUT  std_logic_vector(23 downto 0)
         );
     END COMPONENT;
-    
 
    --Inputs
    signal tb_Clock : std_logic := '0';
@@ -33,7 +27,7 @@ ARCHITECTURE behavior OF tb_SPI IS
  	--Outputs
    signal tb_SCLK : std_logic;
    signal tb_CS : std_logic;
-   signal tb_Convert : std_logic;
+   signal tb_Display : std_logic;
    signal tb_DataOut : std_logic_vector(23 downto 0);
 
    -- Clock period definitions
@@ -55,7 +49,7 @@ BEGIN
           Reset => tb_Reset,
           SCLK => tb_SCLK,
           CS => tb_CS,
-          Convert => tb_Convert,
+          Display => tb_Display,
           DataOut => tb_DataOut
         );
 
@@ -67,7 +61,6 @@ BEGIN
 		tb_Clock <= '1';
 		wait for tb_Clock_period/2;
    end process;
-
 
    -- Stimulus process
    stim_proc: process
@@ -83,21 +76,17 @@ BEGIN
 		wait for 110ns;
 		--Write data
       for i in 0 to 15 loop
-
 			tb_MISO <= Data1(i);
 			wait for 240 ns;
       end loop;
 		
 		tb_MISO <= '0';
-		
 		wait for 330ms;
 		wait for 300ns;
 		--Write data
 		for i in 0 to 15 loop
-
 			tb_MISO <= Data2(i); -- 937 / 3A9
 			wait for 240 ns;
-
       end loop;
 		
 		tb_MISO <= '0';
@@ -105,10 +94,8 @@ BEGIN
 		wait for 300ns;
 		--Write data
 		for i in 0 to 15 loop
-
 			tb_MISO <= Data3(i);	-- 2000 / 7D0
 			wait for 240 ns;
-
       end loop;
 		
 		tb_MISO <= '0';
@@ -124,13 +111,9 @@ BEGIN
 		wait for 100ns;
 		--Write data
 		for i in 0 to 15 loop
-
 			tb_MISO <= Data4(i);	-- 4095 / FFF
 			wait for 240 ns;
-
       end loop;
-		
       wait;
    end process;
-
 END;
